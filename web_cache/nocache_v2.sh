@@ -7,8 +7,8 @@ path=$1 #输入的页面代码路径
 
 if [ "$1" = "" ]; then
     echo "args err"
-    echo "help: ./no_cache [web_path]"
-    echo "example: ./no_cache ./web"
+    echo "help: $0 [web_path]"
+    echo "example: $0 ./web"
     exit -1
 fi
 
@@ -36,7 +36,7 @@ do
     esac
 done > key.txt
 
-echo "#####################################"
+echo "################done#####################"
 
 # 生成需要替换的文件列表
 find $save_path -type f ! -path "*.svn*" | grep -E ".*\.((css)|(js)|(html))$" > file.txt
