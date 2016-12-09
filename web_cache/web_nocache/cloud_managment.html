@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <link href="css/reasy-ui.css?0349ca697a70f4e0fbbbf759a9b6cbe9" rel="stylesheet">
+    <title></title>
+  <script src="lang/b28n_async.js?82c340f8450f7b50754deea7ea7883cd"></script>
+<script>
+B.setTextDomain(["translate"]);
+</script>
+</head>
+  <body>
+  		<fieldset class="ifmwrap-cloud">
+        	<div class="legend-main">
+                <div id="cloud_set">
+                
+                	<div class="control-group" style="width:100px;right:40px; position:absolute;  text-align:center;">
+                        <img src="img/tenda_code.png?ea40fe84ea279499dc66a4b011d15741">
+                        <label class="help-block" style="color:#999999; text-align:center;">Scan to download Tenda App.</label>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Tenda App:</label>
+                        <div class="controls">
+                            <!--<div id="schedWifiEnable" class="btn-off"></div>-->
+                            <div id="cloudEnable" class="btn-off"></div>
+                            <label class="help-block cloud_help" style="color:#999999;margin-top:10px; width:70%;">When enabled, you can manage your router remotely with Tenda App.</label>
+                            
+                        </div>
+                    </div>
+                    <div id="cloud_account_set" class="none">
+                        <div class="control-group">
+                            <label class="control-label">ID：</label>
+                            <div class="controls controls-text" id="sn" style="color:#f90;"></div>
+                            
+                             <label style="line-height:30px;" id="sn_img">
+                                <img src="img/loading.gif?a3ade3da3aa4bc51a36d64b2cf33afe3">
+                                <span style="display:inline-block; vertical-align:text-bottom;height:32px;font-size:14px;color:#f90;margin-left:10px; font-weight:bold;">Obtaining an ID...</span>
+                            </label>
+                            <div class="controls none" id="btn_sn_wrap">
+                            	<input type="button" class="btn" id="btn_sn" value="Obtain ID"/>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="control-group none">
+                            <label class="control-label">Password</label>
+                            <div class="controls">
+                                <input type="password" class="text" id="pwd" name="pwd">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Account:</label>
+                            <label style="line-height:30px;" id="cloud_img">
+                                <img src="img/loading.gif?a3ade3da3aa4bc51a36d64b2cf33afe3">
+                                <span style="display:inline-block; vertical-align:text-bottom;height:32px;font-size:14px;color:#f90;margin-left:10px; font-weight:bold;">Connecting server...</span>
+                            </label>
+                            <div class="controls none">
+                                <input type="text" class="text" id="account" name="account">
+                            </div>
+                            <div class="controls none" id="btn_acc_wrap">
+                            	<input type="button" class="btn" id="btn_acc" value="Obtain cloud account"/>
+                            </div>
+                        </div>
+
+                	</div>
+                
+                	<div class="control-group">
+                		<div class="red page-err" id="err-msg">&nbsp;</div>
+                	</div>
+                    <div class="btn-group" style="margin-top:25px;">
+                        <input type="button" class="btn btn-normal" id="submit" value="Save">
+                    </div>
+            	</div>
+
+            </div>
+        </fieldset>
+    
+    <script src="js/libs/j.js?272bc04208b7aea459236b0f4d8fdba6"></script>
+    <script src="js/libs/reasy-ui-1.0.3.js?ba0ffe0b78ceced20cec6523805d293f"></script>
+    <script src="js/libs/public.js?4f442a67c6beb3ac965945c79f26a5df"></script>
+    <script src="js/cloud_management.js?36a7c9b940b657464b43ce653c863ae0"></script>   
+</body></html>

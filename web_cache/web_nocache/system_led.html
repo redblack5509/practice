@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <link href="css/reasy-ui.css?0349ca697a70f4e0fbbbf759a9b6cbe9" rel="stylesheet">
+    <title></title>
+  <script src="lang/b28n_async.js?82c340f8450f7b50754deea7ea7883cd"></script>
+<script>
+B.setTextDomain(["translate"]);
+</script>
+</head>
+  <body>
+        <fieldset class="ifmwrap-lan">
+        	<div class="legend-main">
+            	<div class="control-group">
+                <label class="control-label" style="width: 138px;">LED Control:<span>&nbsp;&nbsp;</span></label>
+                    <div class="controls">
+                    	<label class="radio" for="ledType1">
+                            <input type="radio" name="ledType" id="ledType1" value="open">LED ON</label>
+                        <label class="radio" for="ledType2">
+                            <input type="radio" name="ledType" id="ledType2" value="close">LED OFF</label>
+                        <label class="radio" for="ledType3">
+                            <input type="radio" name="ledType" id="ledType3" value="time">LED Schedule</label>
+                    </div>
+                </div>
+                <div id="time_set" class="none">
+                    <div class="control-group">
+                        <label class="control-label" style="width: 138px;">Turn off LED during:<span>&nbsp;&nbsp;</span> </label>
+                        <div class="controls">
+                            <select name="startHour" id="startHour" class="input-mini"></select>:<select name="startHour" id="startMin" class="input-mini"></select>~<select name="startHour" id="endHour" class="input-mini"></select>:<select name="startHour" id="endMin" class="input-mini"></select>&nbsp;
+                        </div>
+                    </div>
+                    <p class="txt-center text-warning none" id="timeUpTip">The LED Schedule takes effect when the system time synchronizes the Internet time.</p>
+                    <div class="control-group">
+                        <div class="red page-err" id="msg-err">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="btn-group">
+                	<input type="button" class="btn btn-normal" id="submit" value="Save">
+                </div>
+            </div>
+        </fieldset>
+    
+    <script src="js/libs/j.js?272bc04208b7aea459236b0f4d8fdba6"></script>
+    <script src="js/libs/reasy-ui-1.0.3.js?ba0ffe0b78ceced20cec6523805d293f"></script>
+    <script src="js/libs/public.js?4f442a67c6beb3ac965945c79f26a5df"></script>
+    <script src="js/system_led.js?e95d09b3cca554010e65d3d9b2fb0d87"></script>
+</body></html>

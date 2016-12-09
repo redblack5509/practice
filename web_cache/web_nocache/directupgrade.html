@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link href="css/reasy-ui.css?0349ca697a70f4e0fbbbf759a9b6cbe9" rel="stylesheet">
+    <title></title>
+    <script src="lang/b28n_async.js?82c340f8450f7b50754deea7ea7883cd"></script>
+    <script>
+    B.setTextDomain(["translate"]);
+    </script>
+</head>
+
+<body onload="initDirectUpgrade();">
+    <fieldset class="ifmwrap-time">
+        <div class="legend-main">
+            <form name="frmSetup" method="POST" action="/cgi-bin/upgrade" enctype="multipart/form-data">
+                <div id="online_upgrade_wrap">
+
+                    <div id="detect_version_wrap">
+                        <div id="download_note" class="none">
+                            <div class="control-group">
+                                <label class="control-label">Downloading…<span class="hide-white">：</span>
+                                </label>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label red">Note:</label>
+                                <div class="controls red">After the firmware is downloaded, the Router will start upgrade automatically. Keep the power supply on during the upgrade in case of damage to the Router.</div>
+                            </div>
+                        </div>
+
+                        <!--如果已经完成攻心检测，则显示版本信息和更新内容-->
+                        <div id="status_checked">
+                            <div class="control-group">
+                                <label class="control-label">Latest Version:</label>
+                                <div class="controls controls-text" id="new_fw_ver"></div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Updated Content:</label>
+                                <div class="controls">
+                                    <textarea readonly="" id="releaseNote" style="width:330px; height:140px; background:#fff; resize:none;">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="controls controls-text" id="status_checking">
+                            </div>
+
+                            <div class="controls controls-text none" id="upgrade_err">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="btn-group" style="margin-top:30px;">
+                        <input type="button" style="width:183px;" class="btn btn-normal" id="download_soft" value="Download & Upgrade">
+
+                    </div>
+
+                    <div id="status_progress" class="control-group none">
+                        <!--进度条-->
+
+                        <div id="progress_bg" style="background:#f7e7db; border:1px solid #ff7003; width:400px; position:relative; height:20px; border-radius:12px; margin:auto;">
+                            <div id="progress_bar" style="background:url(img/progress.png?bfe7ac62cddaff3b27809004bb31df93) repeat-x; position:relative; width:40px; height:20px;border-radius:12px;">
+                                <div id="progress_num" style="position:absolute;top:-1px; right:-1px;background:#ffffff; border:1px solid #ff7003; width:40px; border-radius:12px; height:20px; text-align:center;"><span style="text-align:center; font-size:12px;">0%</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </fieldset>
+
+    <script src="js/libs/j.js?272bc04208b7aea459236b0f4d8fdba6"></script>
+    <script src="js/libs/reasy-ui-1.0.3.js?ba0ffe0b78ceced20cec6523805d293f"></script>
+    <script src="js/libs/public.js?4f442a67c6beb3ac965945c79f26a5df"></script>
+    <script src="js/libs/ajaxfileupload.js?17b8ce161912f040bca0f2a61868eefb"></script>
+    <script src="js/system.js?3e666b51cc0818450e3f3a6094df2e07"></script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <link href="css/reasy-ui.css" rel="stylesheet">
+    <title></title>
+  <script src="lang/b28n_async.js"></script>
+<script>
+B.setTextDomain(["translate"]);
+</script>
+</head>
+  <body>
+        <fieldset class="ifmwrap-dhcp">
+        	<div class="legend-main">
+            	<div class="control-group">
+                	<label class="control-label">DLNA Service</label>
+                    <div class="controls">
+                    	<div id="dlnaEn" class="btn-off"></div>
+                    </div>
+                </div>
+                <div id="dlna_set" class="none">
+                    <div class="control-group">
+                        <label class="control-label">Device Name:</label>
+                        <div class="controls">
+                           <input type="text" id="deviceName" data-options="{&quot;type&quot;:&quot;pwd&quot;, &quot;args&quot;:[5,15]}"  required="required" class="input-medium validatebox" maxlength="15">
+                           <input type="button" value="Refresh" id="refresh" class="btn btn-small" style="margin-left:20px;display:none;">
+                           <div style="display: none; vertical-align: middle;">
+                           	<img src="./img/loading.gif" style="width:20px;margin-left:15px;">
+                           </div>
+                        </div>
+                    </div>
+                    <div class="control-group none">
+                    	<div style="margin-left:24px;">Click the Refresh button to update dlna resoures, such as newly added images, audio, video and other media files.</div>
+                    </div>
+                    <div class="control-group">
+                        <div class="red page-err" id="msg-err">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="btn-group">
+                	<input type="button" class="btn btn-normal" id="submit" value="Save">
+                </div>
+            </div>
+        </fieldset>
+    
+    <script src="js/libs/j.js"></script>
+    <script src="js/libs/reasy-ui-1.0.3.js"></script>
+    <script src="js/libs/public.js"></script>
+    <script src="js/dlna.js"></script>
+</body></html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link href="css/reasy-ui.css" rel="stylesheet">
+    <title></title>
+    <script src="lang/b28n_async.js"></script>
+    <script>
+    B.setTextDomain(["translate"]);
+    </script>
+</head>
+
+<body>
+    <fieldset class="ifmwrap-dmz">
+        <div class="legend-main" style="margin-left:15px;margin-right:15px;">
+            <div class="control-group">
+                <label class="control-label" style="width: 120px;">Bandwidth Control:</label>
+                <div class="controls">
+                    <div id="netControlEn" class="btn-off"></div>
+                </div>
+            </div>
+            <div id="netList" class="control-group none" style="min-height: 300px; max-height:500px; overflow-x:hidden;overflow-y: auto;height: 330px;">
+                <table class="table table-fixed">
+                    <tbody>
+                        <tr>
+                            <th width="15%">Device Name</th>
+                            <th width="18%">Device Info</th>
+                            <th width="15%">Current Speed</th>
+                            <th width="18%">Upload Limit</th>
+                            <th width="18%">Download Limit</th>
+                            <th width="8%">Status</th>
+                            <th width="8%">Action</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" class="input-small" maxlength="20" id="deviceName" placeholder="Optional">
+                            </td>
+                            <td style="width:178px;">
+                                <input type="text" class="input-small" id="deviceInfo" placeholder="MAC Address" maxlength="17">
+                            </td>
+                            <td>
+                                <span>---</span>
+                            </td>
+                            <td>
+                                <span id='limitUp' class='validatebox'></span>
+                            </td>
+                            <td>
+                                <span id='limitDown' class='validatebox'></span>
+                            </td>
+                            <td>
+                                <span>---</span>
+                            </td>
+                            <td>
+                                <input type="button" value="Add" class="btn add btn-small">
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody id="netBody">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="control-group">
+                <div class="red page-err" id="msg-err">&nbsp;</div>
+            </div>
+            <div class="btn-group">
+                <input type="button" class="btn btn-normal" id="submit" value="Save">
+            </div>
+        </div>
+    </fieldset>
+
+    <script src="js/libs/j.js"></script>
+    <script src="js/libs/reasy-ui-1.0.3.js"></script>
+    <script src="js/libs/public.js"></script>
+    <script src="js/net_control.js"></script>
+</body>
+
+</html>

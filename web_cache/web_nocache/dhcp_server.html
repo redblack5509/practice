@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <link href="css/reasy-ui.css?0349ca697a70f4e0fbbbf759a9b6cbe9" rel="stylesheet">
+    <title></title>
+  <script src="lang/b28n_async.js?82c340f8450f7b50754deea7ea7883cd"></script>
+<script>
+B.setTextDomain(["translate"]);
+</script>
+</head>
+  <body>
+        <fieldset class="ifmwrap-dhcp">
+        	<div class="legend-main">
+            	<div class="control-group">
+                	<label class="control-label">DHCP Server:</label>
+                    <div class="controls">
+                    	<div id="dhcpEn" class="btn-off"></div>
+                    </div>
+                </div>
+                <div id="dhcp_set" class="hidden">
+                    <div class="control-group">
+                        <label class="control-label">IP Address Range:</label>
+                        <div class="controls">
+                            <span id="dhcp_net">192.168.23</span>
+                            <input type="text" id="sip" maxlength="3" class="input-mic-mini">~<input type="text" id="eip" maxlength="3" class="input-mic-mini">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Lease Time:</label>
+                        <div class="controls">
+                            <select id="lease" name="lease" class="input-small">
+                                <option value="168">7 days</option>
+                                <option value="48">2 days</option>
+                                <option value="24">1 day</option>
+                                <option value="6">6 hours</option>
+                                <option value="1">1 hour</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                	<div class="red page-err" id="msg-err">&nbsp;</div>
+                </div>
+                <div class="btn-group">
+                	<input type="button" class="btn btn-normal" id="submit" value="Save">
+                </div>
+            </div>
+        </fieldset>
+    
+    <script src="js/libs/j.js?272bc04208b7aea459236b0f4d8fdba6"></script>
+    <script src="js/libs/public.js?4f442a67c6beb3ac965945c79f26a5df"></script>
+    <script src="js/dhcp_server.js?70391f893f38ac818fe6513a07ead723"></script>
+</body></html>

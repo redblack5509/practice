@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <link href="css/reasy-ui.css?0349ca697a70f4e0fbbbf759a9b6cbe9" rel="stylesheet">
+    <title></title>
+  <script src="lang/b28n_async.js?82c340f8450f7b50754deea7ea7883cd"></script>
+<script>
+B.setTextDomain(["translate"]);
+</script>
+</head>
+  <body>
+        <fieldset class="ifmwrap-dhcp">
+        	<div class="legend-main">
+            	<div class="control-group">
+                	<label class="control-label">DLNA Service</label>
+                    <div class="controls">
+                    	<div id="dlnaEn" class="btn-off"></div>
+                    </div>
+                </div>
+                <div id="dlna_set" class="none">
+                    <div class="control-group">
+                        <label class="control-label">Device Name:</label>
+                        <div class="controls">
+                           <input type="text" id="deviceName" data-options="{&quot;type&quot;:&quot;pwd&quot;, &quot;args&quot;:[5,15]}"  required="required" class="input-medium validatebox" maxlength="15">
+                           <input type="button" value="Refresh" id="refresh" class="btn btn-small" style="margin-left:20px;display:none;">
+                           <div style="display: none; vertical-align: middle;">
+                           	<img src="./img/loading.gif?a3ade3da3aa4bc51a36d64b2cf33afe3" style="width:20px;margin-left:15px;">
+                           </div>
+                        </div>
+                    </div>
+                    <div class="control-group none">
+                    	<div style="margin-left:24px;">Click the Refresh button to update dlna resoures, such as newly added images, audio, video and other media files.</div>
+                    </div>
+                    <div class="control-group">
+                        <div class="red page-err" id="msg-err">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="btn-group">
+                	<input type="button" class="btn btn-normal" id="submit" value="Save">
+                </div>
+            </div>
+        </fieldset>
+    
+    <script src="js/libs/j.js?272bc04208b7aea459236b0f4d8fdba6"></script>
+    <script src="js/libs/reasy-ui-1.0.3.js?ba0ffe0b78ceced20cec6523805d293f"></script>
+    <script src="js/libs/public.js?4f442a67c6beb3ac965945c79f26a5df"></script>
+    <script src="js/dlna.js?3c0bb3bc6eb025c4c9130467470fe606"></script>
+</body></html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <link href="css/reasy-ui.css?0349ca697a70f4e0fbbbf759a9b6cbe9" rel="stylesheet">
+    <title></title>
+  <script src="lang/b28n_async.js?82c340f8450f7b50754deea7ea7883cd"></script>
+<script>
+B.setTextDomain(["translate"]);
+</script>
+</head>
+  <body>
+        <fieldset class="ifmwrap-dmz">
+            <div class="legend-main">
+              <div id="portList" class="control-group scroll-right" style="min-height: 300px; max-height:500px; overflow-x:hidden;">
+                <table class="table" style="border-collapse: separate;border-spacing: 2px;">
+                    <tbody><tr>
+                        <th style="width:20%;">Target Network</th>
+                        <th style="width:20%;">Subnet Mask</th>
+                        <th style="width:20%">Gateway</th>
+                        <th style="width:20%">Interface</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="input-small validatebox" id="network" maxlength="15"></td>
+                        <td><input type="text" class="validatebox input-small" id="mask" maxlength="15"></td>
+                        <td><input type="text" class="validatebox input-small" id="gateway" maxlength="15"></td>
+                        <td>---</td>
+                        <td><input type="button" value="Add" class="btn add btn-small"></td>
+                    </tr>
+
+                 </tbody><tbody id="portBody">
+                     
+                 </tbody>
+                 </table>
+               </div>
+               <div class="control-group">
+                    <div class="red page-err" id="msg-err">&nbsp;</div>
+                </div>
+                <div class="btn-group">
+                    <input type="button" class="btn btn-normal" id="submit" value="Save">
+                </div>
+            </div>
+        </fieldset>
+    
+    <script src="js/libs/j.js?272bc04208b7aea459236b0f4d8fdba6"></script>
+    <script src="js/libs/reasy-ui-1.0.3.js?ba0ffe0b78ceced20cec6523805d293f"></script>
+    <script src="js/libs/public.js?4f442a67c6beb3ac965945c79f26a5df"></script>
+    <script src="js/static_route.js?0650b2b3b060b34aa0efb6b6c990e422"></script>
+</body></html>

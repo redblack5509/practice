@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link href="css/reasy-ui.css?0349ca697a70f4e0fbbbf759a9b6cbe9" rel="stylesheet">
+    <title></title>
+    <script src="lang/b28n_async.js?82c340f8450f7b50754deea7ea7883cd"></script>
+    <script>
+    B.setTextDomain(["translate"]);
+    </script>
+</head>
+
+<body>
+    <fieldset class="ifmwrap-cloud">
+        <div class="legend-main" id="parental_container">
+            <div id="parental_list" style="min-height: 300px; max-height:500px; overflow-x:hidden;overflow-y: auto;height: 470px;width: 600px;">
+
+                <table class="table table-fixed">
+                    <thead>
+                        <tr>
+                            <th width="30%">Device Name</th>
+                            <th width="20%">IP Address</th>
+                            <th width="20%">MAC Address</th>
+                            <th width="15%">Status</th>
+                            <th width="15%">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="list"></tbody>
+                </table>
+                <div style="text-align:right">
+                    <input type="button" value="Add" class="btn add" style="width:60px;height:30px">
+                </div>
+            </div>
+
+            <div id="rule_list" class="none">
+
+                <table class="table">
+                    <tbody id="list2">
+                        <tr>
+                            <th width="20%"></th>
+                            <th width="40%"></th>
+                            <th width="10%"></th>
+                            <th width="30%"></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="parental_wrap" class="none">
+
+                <div class="control-group" id="editName">
+                    <label class="control-label" style="line-height:30px;">Device Name:<span>&nbsp;&nbsp;</span></label>
+                    <div class="controls controls-text">
+                        <span id="device_name" style="float:left;width:170px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;line-height:30px;"></span>
+                        <label class="none" id="device_mac"></label>
+                        <span style="margin-left:10px;line-height:30px;"><input type="button" id="device_edit" class="btn btn-mini" value="Edit"></span>
+
+                    </div>
+                </div>
+
+                <div id="addName">
+                    <div class="control-group">
+                        <label class="control-label">Device Name:<span>&nbsp;&nbsp;</span></label>
+                        <div class="controls">
+                            <input style="width:190px;" type="text" maxlength="20" name="deviceName" id="deviceName">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">MAC Address:<span>&nbsp;&nbsp;</span></label>
+                        <div class="controls">
+                            <input style="width:190px;" type="text" name="deviceMac" id="deviceMac">Format: XX:XX:XX:XX:XX:XX
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group none">
+
+                    <label class="control-label">Parental Control:<span>&nbsp;&nbsp;</span></label>
+                    <div class="controls">
+                        <div id="parentcontrolEnable" class="btn-off"></div>
+
+                    </div>
+                </div>
+
+                <div id="parental_set">
+
+
+                    <div class="control-group">
+                        <label class="control-label">Internet Accessible Time:<span>&nbsp;&nbsp;</span></label>
+                        <div class="controls">
+                            <select name="startHour" id="startHour" class="input-mini"></select>&nbsp;
+                            <select name="startMin" id="startMin" class="input-mini"></select> ~
+                            <select name="endHour" id="endHour" class="input-mini"></select>&nbsp;
+                            <select name="endMin" id="endMin" class="input-mini"></select>
+                        </div>
+                    </div>
+
+                    <div class="control-group" style="margin-bottom:4px;">
+                        <label class="control-label">Repeat:<span>&nbsp;&nbsp;</span></label>
+                        <div class="controls" style="height:30px;">
+                            <label class="radio" for="everyday">
+                                <input type="radio" name="timeType" id="everyday" value="0">Every Day</label>
+                            <label class="radio" for="thatday">
+                                <input type="radio" name="timeType" id="thatday" value="1">Specified Days</label>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label"></label>
+                        <div class="controls">
+                            <label class="radio" for="day0" style="width:65px;">
+                                <input type="checkbox" id="day0">Sun.</label>
+                            <label class="radio" for="day1" style="width:65px;">
+                                <input type="checkbox" id="day1">Mon.</label>
+                            <label class="radio" for="day2" style="width:65px;">
+                                <input type="checkbox" id="day2">Tue.</label>
+                            <label class="radio" for="day3" style="width:65px;">
+                                <input type="checkbox" id="day3">Wed.</label>
+                            </div>
+                        <label class="control-label"></label>
+                        <div class="controls">
+                            <label class="radio" for="day4" style="width:65px;">
+                                <input type="checkbox" id="day4">Thur.</label>
+                            <label class="radio" for="day5" style="width:65px;">
+                                <input type="checkbox" id="day5">Fri.</label>
+                            <label class="radio" for="day6" style="width:65px;">
+                                <input type="checkbox" id="day6">Sat.</label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Website Limit:<span>&nbsp;&nbsp;</span></label>
+                        <div class="controls">
+                            <div class="btn-off" id="whiteEnable"></div>
+                        </div>
+                    </div>
+
+                    <div id="web_limit">
+                        <div class="control-group" style="margin-bottom:4px;">
+                            <label class="control-label">Access Control:<span>&nbsp;&nbsp;</span></label>
+                            <div class="controls" style="height:30px;">
+                                <label class="radio" for="black">
+                                    <input type="radio" name="limitType" id="black" value="0">Blacklist</label>
+                                <label class="radio" for="white">
+                                    <input type="radio" name="limitType" id="white" value="1">White List</label>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" id="limit_label">Accessible Website:<span>&nbsp;&nbsp;</span></label>
+                            <div class="controls">
+                                <input type="text" class="text" id="parent_urls" maxlength="319" style="width:350px;">
+                                <label class="help-block" style="margin-top: 8px;margin-left: 40px;"></label>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="control-group">
+                    <div class="red page-err" id="msg-err"></div>
+                </div>
+                <div class="btn-group" style="margin-top:5px;">
+                    <input type="button" id="save" class="btn" value="Save">
+                    <input type="button" id="cancel" class="btn last" value="Cancel">
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <script src="js/libs/j.js?272bc04208b7aea459236b0f4d8fdba6"></script>
+    <script src="js/libs/reasy-ui-1.0.3.js?ba0ffe0b78ceced20cec6523805d293f"></script>
+    <script src="js/libs/public.js?4f442a67c6beb3ac965945c79f26a5df"></script>
+    <script src="js/parental_control.js?8ac8348947209fb48e595c9ca18e7267"></script>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+{
+    "netControl": "1",
+    "led": "1",
+    "cloud":"0",
+    "remoteWeb":"1",
+    "nopwd": false,
+    "ddns":"1",
+    "upnp":"0",
+    "iptv":"1", 
+    "wl_mode": "wisp",
+    "parentControl": "1",
+    "virtualServer": "0",
+    "firewall": "1",
+    "dmz": "0",
+    "staticRoute": "1"
+}

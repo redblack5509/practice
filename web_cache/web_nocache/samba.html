@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <link href="css/reasy-ui.css?0349ca697a70f4e0fbbbf759a9b6cbe9" rel="stylesheet">
+    <title></title>
+  <script src="lang/b28n_async.js?82c340f8450f7b50754deea7ea7883cd"></script>
+<script>
+B.setTextDomain(["translate"]);
+</script>
+</head>
+  <body>
+        <fieldset class="ifmwrap-cloud" id="content">
+        	<div class="legend-main samba">
+                <div id="usbList"></div>
+                <!--<div class="control-group">
+                    <label class="control-label">Guest Account:</label>
+                    <div class="controls controls-text">
+                        <div id="userName">admin</div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Password:</label>
+                    <div class="controls">
+                        <input type="text" id="password" class="input-medium validatebox" maxlength="32" required="required" data-options="{&quot;type&quot;:&quot;pwd&quot;, &quot;args&quot;:[5,15]}">
+                    </div>
+                </div>-->
+                <!-- <div class="control-group">
+                    <label class="control-label">LAN devices visit:&nbsp;&nbsp;</label>
+                </div> -->
+                <div class="control-group">
+                    <label class="control-label">FTP Server:<span>&nbsp;</span></label>
+                    <div class="controls">
+                        <div class="net-link">
+                            <a style="line-height:30px;" id="ftpLink"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Samba Server for Windows:<span>&nbsp;</span></label>
+                    <div class="controls">
+                        <div class="net-link">
+                            <span style="line-height:30px;" id="localLink"></span>
+                            <!-- <span type="button" class="btn btn-small btn-color-white" id="localLinkCopyBtn" style="position:relative;">Copy</span>
+                            <span id="copyMsg" class="text-warning">复制成功</span> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Samba Server for MAC:<span>&nbsp;</span></label>
+                    <div class="controls">
+                        <div class="net-link">
+                            <span style="line-height:30px;" id="localMacLink"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="internet_set_wrap">
+                    <div class="control-group">
+                        <label class="control-label">Allow Internet visits:<span>&nbsp;</span></label>
+                        <div class="controls">
+                            <div id="premitEn" class="btn-off"></div>
+                        </div>
+                    </div>
+                    <div class="control-group none" id="internet_set">
+                        <label class="control-label">WAN devices visit:<span>&nbsp;</span></label>
+                        <div class="controls">
+                            <div class="net-link">
+                                <a><span id="internetLink"></span></a>:<input type="text" class="input-mini validatebox" id="internetPort" required="required" maxlength="5" data-options="{&quot;type&quot;: &quot;num&quot;, &quot;args&quot;:[1,65535]}" style="width:50px">
+                            </div>
+                            <!-- <div class='edit'></div> -->
+                        </div>
+                    </div>    
+                </div>
+
+
+
+                <div class="control-group">
+                    <div class="red page-err" id="msg-err">&nbsp;</div>
+                </div>
+                <div id="userList" class="">
+                    <table class="table">
+                        <tbody><tr>
+                            <th>Role</th>
+                            <th>User name</th>
+                            <th>Password</th>
+                            <th>Permission</th>
+                            <th>Action</th>
+                        </tr>
+                        </tbody>
+                        <tbody id="upnpBody">
+                            <tr>
+                                <td>Administrator</td>
+                                <td>admin</td>
+                                <td><input type="password" class="input-mini validatebox" id="password" value="admin" maxlength="32" required="required" data-options="{&quot;type&quot;:&quot;pwd&quot;, &quot;args&quot;:[5,32]}"></td>
+                                <td>Read/Write</td>
+                                <td><input type="button" value="Add" class="btn add btn-small"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="control-group">
+                    <div style="padding-left: 65px;" class="red guest-user-err" id="guest-user-err">&nbsp;</div>
+                </div>
+
+                <div class="btn-group">
+                	<input type="button" class="btn btn-normal" id="submit" value="Save">
+                </div>
+            </div>
+        </fieldset>
+        <p class="nocontent-notify none" id="nocontent">No available USB device on the USB port. Please connect a USB device to it first.</p>
+    
+    <script src="js/libs/j.js?272bc04208b7aea459236b0f4d8fdba6"></script>
+    <script src="js/libs/reasy-ui-1.0.3.js?ba0ffe0b78ceced20cec6523805d293f"></script>
+    <script src="js/libs/public.js?4f442a67c6beb3ac965945c79f26a5df"></script>
+    <script src="js/libs/jquery.zclip.min.js?35d5861810d6175868eab6be321f5ff6"></script>
+    <script src="js/samba.js?861626e4911bfb0b6fcd51217b252ec6"></script>
+</body></html>

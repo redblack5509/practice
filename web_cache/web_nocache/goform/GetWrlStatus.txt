@@ -1,0 +1,8 @@
+{
+    "schedWifiEn":"0",
+    "wispEn": "1",
+    "wpsEn": "1",
+    "namePwd": "1", 
+    "beamforming": "0",
+    "signal": "02"
+}

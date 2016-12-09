@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" style="display: none;">
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Tenda | diagnose</title>
+<link href="./css/reasy-ui.css?0349ca697a70f4e0fbbbf759a9b6cbe9" rel="stylesheet">
+<script type="text/javascript" charset="utf-8" src="./js/libs/j.js?272bc04208b7aea459236b0f4d8fdba6"></script>
+
+<!--[if IE 6]>
+    <link href="css/ie6.css?e5c462459ce0a72a9728232891a0463b" rel="stylesheet">
+    <script src="js/libs/DD_belatedPNG_0.0.8a-min.js?849d70044bc54678f4835308534513bd"></script>
+    <script>
+        var isIE6 = true;
+        DD_belatedPNG.fix('*');
+    </script>
+<![endif]-->
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+    <script src="js/libs/html5shiv.js?262bb88879efaaf75c74154fe0308952"></script>
+<![endif]-->
+
+<script src="lang/b28n_async.js?82c340f8450f7b50754deea7ea7883cd"></script>
+
+</head>
+<body >
+<style>
+@media (min-width: 768px) {
+  .login .img-responsive {
+    width: 100% \9;
+    height: 40px;
+    max-width: 100%;
+  }
+}
+.login {
+    margin-top: 100px;
+    padding: 56px;
+}
+
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 750px;
+}
+.box-shadow {
+    border: 1px solid #ccc;
+    background: #fff;
+    box-shadow: 0 0 12px #bbb;
+}
+.err-title {
+  margin-left: 20px;
+  font-weight:400;
+  font-style:normal;
+  font-size:16px;
+}
+.devices {
+    margin-left: 10%;
+    height: 60px;
+}
+.connect {
+    height: 60px;
+}
+.disconnect {
+    height: 51px;
+}
+.router
+{
+    height: 38px;
+}
+.no-border p{
+    margin-left: 10%;
+}
+
+.desc-txt {
+    display:block;
+    float:left;
+    width: 100px;
+    text-align: center;
+}
+.desc1 {
+    margin-left: 14%;
+}
+.desc2 {
+    margin-left: 16%;
+}
+.desc3 {
+    margin-left: 13%;
+}
+
+.text-danger {
+    color: #f30;
+    font-size: 15px;
+    margin-top: 20px;
+}
+.reason {
+    margin-right: 10%;
+    color: #333;
+}
+.moreinfo {
+    color: #CCC;
+}
+#login {
+    margin-left: 200px;
+}
+#no-more, #no-more:focus {
+    background-color: #E4E4E4;
+    color: #4D61CB;
+    margin-left: 30px;
+}
+.btn-normal {
+    font-size: 14px;
+    width: 120px;
+    height: 40px;
+}
+p {
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+#pic-desc {
+    font-weight:400;font-style:normal;font-size:13px;
+}
+
+#logo {
+    height: 34px;
+    width: 110px;
+}
+
+</style>
+<section class="container">
+  <div class="row none">
+    <div class="center-block">
+      <article class="login box-shadow">
+        <header> 
+          <div>
+            <img id="logo" src="img/index-logo.png?e61e862529ab9ec4c7870f46187d6b98" class="img-responsive">
+            <span class="err-title">Diagnosis</span>
+          </div>
+        </header>
+        <hr/>
+        <fieldset class="no-border">
+            <div id="pic-container">
+                <span style="display:block;width:450px; height:50px; background-image:url('img/diagnose.png?84104448680a7cf695cd10e81e813c85');background-position:0px 0px;margin:auto"></span>
+            </div>
+            <div id="pic-desc">
+                <span class="desc1 desc-txt">Devices</span>
+                <span class="desc2 desc-txt">Router</span>
+                <span class="desc3 desc-txt">Internet</span>
+            </div>
+        </fieldset>
+        <fieldset class="no-border">
+            <p class="text-danger"><span id="errCode"></span><span id="failToAccess">Fail to access the Internet!</span></p>
+            <p>Reason:<span class="reason"></span></p>
+            <p class="moreinfo">For more features, please log in to the router's user interface…</p>
+            <input type="button" id="login" class="btn btn-normal" value="Router Login">
+            <input type="button" id="no-more" class="btn btn-normal" value="Do not prompt">
+        </fieldset>
+      </article>
+    </div>
+  </div>
+    <div id="loadContainer">
+        <div class="mastbody">
+            <div class="loadding"></div>
+            <div class="loadding-text">Unable to access the Internet! Diagnosing...Please wait...</div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript" charset="utf-8" src="./js/libs/reasy-ui-1.0.3.js?ba0ffe0b78ceced20cec6523805d293f"></script>
+<script type="text/javascript" charset="utf-8" src="./js/libs/public.js?4f442a67c6beb3ac965945c79f26a5df"></script>
+<script type="text/javascript" charset="utf-8" src="./js/network-diagnose.js?97826a83eea7e5f6c5c02569ffd51a08"></script>
+</body>
+</html>
