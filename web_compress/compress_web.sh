@@ -8,8 +8,8 @@ tools_path=$2   #压缩工具的路径
 
 if [ "$1" = "" ] || [ "$2" = "" ] ; then
     echo "args err"
-    echo "help: ./compress_web [web_path] [compress_tools_path]"
-    echo "example: ./compress_web ./compress_tools"
+    echo "help: $0 [web_path] [compress_tools_path]"
+    echo "example: $0 ./a9_multi ./compress_tools"
     exit -1
 fi
 
