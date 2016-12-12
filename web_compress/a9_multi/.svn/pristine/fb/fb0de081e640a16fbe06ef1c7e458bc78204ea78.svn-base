@@ -1,0 +1,159 @@
+<section class="container-fluid">
+    <form class="form-horizontal">
+        <h2 class="legend">&nbsp;</h2>
+        <fieldset style="padding: 0px;">
+            <div id="notify" class="main-section-notify none"><span>Tips: For your network security, please set up a</span>"<a href="javascript:void(0);">login password</a>"
+<span class="close-notify">×</span>
+</div>
+
+            <div class="status-list-main" id="deviceListWrap">
+    <span class="status-list-btn text-content-4" id="onlineList" style="color:#ed7020;">
+                <span name="statusOnlineNumber"></span>
+    <span>Connected Device(s)</span>
+    </span><!-- |
+    <span class="status-list-btn" id="blackList">
+                <span>Blacklist</span>
+    <span id="statusBlackNum"></span> 
+    </span>-->
+</div>
+
+            <div id="statusTopoMap">
+    <div id="wideScreen">
+        <div id="left" class="col-md-6 col-sm-9 col-xs-7">
+            <div id="leftTop" style="height:40px">
+                <div id="routerNameContainer">
+                    <div name="routerName" class="routerName text-content-1 span-fixed"></div>
+                    <div><img src="../img/line1.png" style="width:100px;">
+                    </div>
+                </div>
+            </div>
+            <div id="leftMiddle">
+                <div class="icon-internet col-xs-2">
+                </div>
+                <div class="col-sm-3 col-xs-2">
+                    <img style="margin-top:48px;margin-left:15px;" class="" src="../img/line.png">
+                </div>
+                <div class="col-xs-4"><img style="margin-top:22px;" src="./img/router_status.png" alt=""></div>
+                <div class="col-sm-3 col-xs-4">
+                    <img id="signal" src="../img/level4.png" style="width:70px;padding-top: 15px;cursor:pointer;">
+                    <span id="failFlag" class="icon-x none"></span>
+                </div>
+            </div>
+            <div id="leftBottom">
+                <div class="col-xs-6"><span class="inter-info text-content-1">Internet</span>
+                </div>
+                <div class="col-xs-6"><span class="router-info text-content-1">Hub/Router</span>
+                </div>
+            </div>
+        </div>
+        <div id="right" class="col-md-6 col-sm-3 col-xs-5">
+            <div id="rightTop" class="col-xs-12" style="height:40px;">
+                <div id="extenderNameContainer">
+                    <div name="extendName" class="text-content-1 span-fixed" style="position: relative;left: 15px;"></div>
+                    <div><img src="../img/line2.png" style="width:100px;">
+                    </div>
+                </div>
+            </div>
+            <div id="rightMiddle" class="col-xs-12">
+                <div class="icon-expander col-xs-6" style="margin-left: -40px;">
+                </div>
+                <div id="toHide">
+                    <div class="col-xs-3">
+                        <img src="../img/level4.png" style="width:100px;padding-top: 43px;margin-left: -45px;">
+                    </div>
+                    <div class="icon-device col-xs-3" style="width:70px;padding-top: 60px;">
+                        <span id="numBack" class="icon-circle"></span>
+                        <span name="statusOnlineNumber"></span>
+                    </div>
+                </div>
+            </div>
+            <div id="rightBottom">
+                <div class="col-xs-12" style="margin-left: -8px;line-height: 35px;"><span class="extend-info text-content-1">Extender</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="narrowScreen" class="none">
+        <div id="left" class="col-xs-4 col-xs-offset-4" style="margin-top: -30px;">
+            <div class="icon-internet topo-center"></div>
+            <div class="topo-center text-content-1">Internet</div>
+            <div class="icon-solid text-content-1"></div>
+            <div class="topo-center"><img src="./img/router_status.png" alt=''></div>
+            <div class="topo-center text-content-1">Hub/Router</div>
+            <div id="routerNameContainer">
+                <span name="routerName" class="topo-txt text-content-1"></span>
+            </div>
+            <div class="icon-dot"></div>
+        </div>
+        <div id="right" class="col-xs-4 col-xs-offset-4">
+            <div class="icon-expander topo-center"></div>
+            <div class="topo-center text-content-1">Extender</div>
+            <div id="extendNameContainer">
+                <span name="extendName" class="topo-txt text-content-1"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </fieldset>
+    </form>
+</section>
+
+<div id="online-list-wrapper" class="none">
+	<div class="main-dailog col-xs-10 col-sm-10 col-lg-6 col-xs-offset-1 col-lg-offset-3">
+	    <div class="fopare-ifmwrap-title">
+	        <div id="iframe-msg" class="red"></div>
+	        <div class="iframe-title head_title text-content-1">onlinelist</div>
+	        <div class="iframe-title head_title2"></div>
+	        <div class="iframe-close">&times;</div>
+	    </div>
+	    <section class="legend-main">
+	    	<div class="dialog-content">
+                <div class="dialog-content-table">   
+    		        <table class="table table-fixed" style="*table-layout">
+    		            <thead><tr>
+    		                <th class="col-xs-7 col-sm-4 text-content-5">Device Name</th>
+    		                <th class="col-xs-4 text-content-5">IP Address</th>
+    		                <th class="col-xs-4 hidden-xs col-sm-4 text-content-5">MAC Address</th>
+    		            </tr>
+    		            </thead><tbody id="onlinelist">
+    		            </tbody>
+    		        </table> 
+                </div>
+                <div class="control-group" style="text-align: center;margin-top:10px;">
+                    <button id="closeDevice" class="btn btn-frist btn-primary" style="font-size:12pt; margin-bottom: 30px;">Close
+                    </button>
+                </div>
+	    	</div>
+            
+        </section>
+	</div>	
+</div>
+
+<div id="black-list-wrapper" class="none">
+	<div class="main-dailog col-xs-10 col-sm-10 col-lg-5 col-xs-offset-1 col-lg-offset-4">
+	    <div class="fopare-ifmwrap-title">
+	        <div id="iframe-msg" class="red"></div>
+	        <div class="iframe-title head_title">blacklist</div>
+	        <div class="iframe-title head_title2"></div>
+	        <div class="iframe-close">&times;</div>
+	    </div>
+	    <section class="legend-main">
+	    <div class="dialog-content">     
+
+        <table class="table table-fixed table-hover">
+            <thead>
+                <tr>
+                    <th class="col-xs-7 col-sm-5">Device Name</th>
+                    <th class="col-sm-4 hidden-xs">MAC Address</th>
+                    <th class="col-xs-5 col-sm-3">Remove from Blacklist</th>
+                </tr>
+            </thead>
+            <tbody id="list">
+            </tbody>
+        </table>
+    </div>
+    </section>
+	</div>	
+</div>
+

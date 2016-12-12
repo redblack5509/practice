@@ -1,0 +1,39 @@
+<section class="container-fluid">
+    <form id="wireless" class="form-horizontal">
+        <div id="wifiWrap">
+            <h2 class="legend text-content-1">Wi-Fi Name & Password of the Extender</h2>
+<fieldset>
+    <div class="form-group">
+        <label class="col-sm-4 col-md-4 control-label" for="wifiSSID">Extender Wi-Fi Name</label>
+        <div class="col-sm-4">
+            <input type="text" name="wifiSSID" id="wifiSSID" class="form-control validatebox text-content-1" maxlength="32" required="required" data-options='{"type":"ssid2"}'>
+        </div>
+        <div class="col-sm-4 col-md-4 help-inline">
+            <label class="checkbox-inline">
+                <input type="checkbox" name="wifiHideSSID" id="wifiHideSSID" value="true">
+                <div style="margin-top:-5px;font-size:18px;color:#666666;">Hide</div>
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 col-md-4 control-label" for="wifiPwd">Extender Wi-Fi Password</label>
+        <div class="col-sm-4">
+           <input type="password" name="wifiPwd" id="wifiPwd" class="form-control validatebox text-content-1" maxlength="63" data-options='{"type":"ssidPasword","args":[8, 63]}'>
+           <label class="icon-eye vis-eyes none" style="top:10px">
+              <img src="img/visible.png" style="width:25px">
+            </label>
+            <label class="icon-eye invis-eyes">
+              <img src="img/invisible.png" style="width:25px">
+            </label>
+        </div>
+        <!-- <div class="col-sm-4 col-md-5 help-inline">
+            <label class="checkbox-inline">
+                <input type="checkbox" name="wifiNoPwd" id="wifiNoPwd" value="true">No Password</label>
+        </div> -->
+    </div>
+</fieldset>
+<!--End Wi-Fi Name and Password-->
+
+        </div>
+    </form>
+</section>

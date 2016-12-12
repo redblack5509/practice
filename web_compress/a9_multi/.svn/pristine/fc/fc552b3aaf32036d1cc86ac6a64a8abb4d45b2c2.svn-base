@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>BT Wi-Fi Extender – Wizard</title>
+<link rel="shortcut icon" href="./favicon.ico">
+<link rel="stylesheet" href="./css/reasyui.css">
+
+<link rel="stylesheet" href="./css/quickset.css">
+
+<!-- HTML5 Shim 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 
+HTML5SHIV需放在头部，RESPOND.JS需要服务器--> 
+<!--[if lt IE 9]>
+<script src="./js/libs/respond.min.js"></script>
+<script src="./js/libs/html5shiv.min.js"></script>
+<![endif]--> 
+<script src="./lang/b28n.js"></script>
+<script>
+B.setTextDomain("translate");
+</script>
+</head>
+<body >
+
+    <section class="container">
+        <article class="quickSet box-shadow center-block pull-none col-sm-9 col-md-8 col-lg-8">
+            <header class="row">
+                <div class="col-xs-6 col-sm-3">
+                    <img src="./img/logo.png" alt="">
+                </div>
+            </header>
+            <nav class="text-right">
+                <ol class="breadcrumb">
+                    <li class="active">Select Wi-Fi Name</li>
+                    <li>Enter Password</li>
+                </ol>
+            </nav>
+            <div class="quickContent">
+                <section id="select" class="text-center">
+                    <div class="legend">
+                        <span class="text-content-1">Please select a Wi-Fi name…</span>
+                        <i id="refreshTable" class="ico icon-refresh text-primary" style="color: #55379b;"></i>
+                        <img id="loading" class="img-loading none" alt="Loading..." src="img/loading.gif">
+                    </div>
+                    <div class="col-xs-12">
+                        <table class="table table-fixed table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="width: 15%" class="text-content-5">Select</th>
+                                    <th style="width: 30%" class="text-content-5">Wi-Fi Name</th>
+                                    <th style="text-align:right;width: 25%" class="text-content-5">Encryption/Signal Strength</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div id="wifiScan" class="table-responsive col-xs-12" style="margin-top:-18px;width: 100%;height: 195px;overflow: scroll;overflow-x: hidden;">
+                        <table class="table table-fixed table-hover">
+                            <tbody id="wifiScanTbody">
+                            </tbody>
+                        </table>
+                    </div>
+                    <footer class="form-actions" style="float: left; width: 100%; margin-top: 10px; padding-top: 0;margin-bottom: 10px;">
+                        <button class="btn btn-primary btn-large" id="selectNext">Next</button>
+                    </footer>
+                </section>
+                <section id="details" class="none">
+                    <form class="form-horizontal">
+                        <input type="hidden" id="wifiSecurityMode">
+                        <input type="hidden" id="wifiChannel">
+                        <div class="form-group" style="text-align:left;">
+                            <label class="col-sm-7 col-md-6 control-label text-content-1" style="text-align:right;">Hub/Router Wi-Fi Name:</label>
+                            <div class="col-sm-5 text-content-1 span-fixed" id="wifiName">
+                               Tenda_123456
+                            </div>
+                            
+                        </div>
+                    <div class="form-group" id="wifiPwdCon" style="text-align:left;">
+                        <label class="col-sm-7 col-md-6 control-label text-content-1">Hub/Router Wi-Fi Password:</label>
+                        <div class="col-sm-5 text-content-1" style="padding-top:7px;">
+                           <input type="password" name="wifiPwd" id="wifiPwd" class="form-control validatebox" required="required" maxlength="63" data-options='{"type":"ssidPasword","args":[8, 63]}' style="font-size:14pt;">
+                           <label class="icon-eye vis-eyes none" style="top:15px">
+                          <img src="img/visible.png" style="width:25px">
+                        </label>
+                        <label class="icon-eye invis-eyes">
+                          <img src="img/invisible.png" style="width:25px">
+                        </label>
+                       </div>
+                        
+                    </div>
+        <!-- <div class="form-group">
+            <div class="col-xs-12 col-md-9 col-md-offset-2">
+                <input id="keepUpper" type="checkbox" checked class="col-xs-1">
+                <span class="col-xs-11" style="text-align: left;">Set up the extender's WiFi name and password to the same as those of the Base Station</span>
+            </div>
+        </div> -->
+                    <div id="extenderInfo">
+                        <div class="form-group">
+                            <label class="col-sm-7 col-md-6 control-label text-content-1" >Extender Wi-Fi Name:</label>
+
+                            <div class="col-sm-5 text-content-1">
+                                <input id="extenderName" class="form-control validatebox" maxlength="32" required="required" data-options="{&quot;type&quot;:&quot;ssid3&quot;}" style="font-size:14pt;">
+                            </div>
+                        </div>
+                        <div class="form-group none">
+                            <div class="col-xs-12 col-md-6 col-md-offset-2" id="iconContainer">
+                                <input type="password" id="extenderPwd" class="form-control validatebox" placeholder="Wi-Fi Password of the Extender" maxlength="63" data-options="{&quot;type&quot;:&quot;ssidPasword&quot;,&quot;args&quot;:[8, 63]}">
+                            </div>
+
+                        </div>
+                    </div>
+                    </form>
+                    <footer class="form-actions text-center">
+                        <button class="btn btn-large" id="back">Back</button>
+                        <button class="btn btn-primary btn-large" id="ok">Finish</button>
+                    </footer>
+                </section>
+
+                <section id="doneWrap" class="text-center none">
+                  <div id="savingWrap">
+                    <section class="content">
+                      <h1 class="count" id="countWrap">&nbsp;</h1>
+                    </section>
+                    <footer>
+                      <h2 id="extendStatus" class="text-content-1">Connecting…Please wait...</h2>
+                    </footer>
+                  </div>
+                  <div id="savedWrap" class="none">
+                    <section class="content"><img src="img/loading-ico.gif">
+                    </section>
+                    <div>
+                      <h2><div id="successinternetWrap" class="text-content-1" style="line-height: 22px; margin-bottom: 30px;"></div>
+                        <div id="nameModified" class="text-content-1 none"></div></h2>
+                    </div>
+                    <button class="btn btn-primary btn-large none" id="extend">Back</button>
+                  </div>
+                </section>
+            </div>
+        </article>
+    </section>
+
+<script src="./js/libs/j.js"></script> 
+<script src="./js/libs/reasy-ui-1.0.3.js"></script> 
+<script src="./js/libs/common.js"></script>
+
+<script src="./js/quickset.js"></script>
+
+<script src="./js/libs/time-zone.js"></script>
+
+</body>
+</html>

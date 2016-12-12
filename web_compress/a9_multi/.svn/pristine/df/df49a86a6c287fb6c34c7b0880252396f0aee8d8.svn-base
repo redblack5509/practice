@@ -1,0 +1,14 @@
+.legend-main {
+  padding-top: 20px;
+  margin-left: 50px;
+  margin-right: 50px; }
+
+@media (max-width: 767px) {
+  .legend-main {
+    margin-left: 10px;
+    margin-right: 10px; } }
+
+.count {
+  color: #666;
+  line-height: 96px;
+  background: #fff url(../img/loading-ico.gif) center center no-repeat; }
