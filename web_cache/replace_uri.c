@@ -289,6 +289,12 @@ int update_match_result(char *key_src, char *key_dest, char *index)
     cru = pre->next;
     while(cru)
     {
+        /* key.txt出现两个同名关键字时，会出现同一个位置被匹配两次的异常 */
+        if(cru->index == index)
+        {
+            free(new);
+            return 0;
+        }
         if(cru->index > index)
         {
             break;
