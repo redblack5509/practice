@@ -29,9 +29,18 @@ class TP:
         self.cn_TP = {}
         self.target_TP = {}
         self.TP_save_path = "translate.json"
-        self.log_fd = codecs.open("check_log.txt", "w", encoding='utf-8')
+        if __name__ == '__main__':
+            self.log_fd = codecs.open("check_log.txt", "w", encoding='utf-8')
         self.width_threshold = 150    #宽度告警阈值，超过(最大宽度*width_threshold/100)则报警
 
+
+    # 设置execl翻译包路径
+    def set_execl_path(self, execl_path):
+        self.execl_path = execl_path
+
+    # 设置中文翻译包路径
+    def set_cn_TP_path(self, path):
+        self.cn_TP_path = path
 
     # 输出打印
     def log(self, *args, **kwargs):
@@ -41,8 +50,6 @@ class TP:
 
     # 读execl表格数据，返回翻译包字典
     def load_excel(self):
-        self.log("input file: %s" %(self.execl_path))
-
         # 打开文件
         workbook = xlrd.open_workbook(self.execl_path)
 
@@ -119,6 +126,7 @@ class TP:
 
     # 与中文翻译包对比是否缺少关键字
     def check_miss_key(self):
+        print("cn path" + self.cn_TP_path)
         fd = codecs.open(self.cn_TP_path, "r", encoding='utf-8')
         self.cn_TP = json.load(fd)
         fd.close()
