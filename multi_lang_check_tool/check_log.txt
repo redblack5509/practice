@@ -1,0 +1,103 @@
+[Sun Jan 15 16:12:26 2017] input file: AC15 FANYI.xlsx
+[Sun Jan 15 16:12:26 2017] 处理的表：Sheet1, 共897行2列
+[Sun Jan 15 16:12:26 2017] 如下翻译条目里面有换行符，请检查:
+"This browser or lower (such as ie 6) cannot support the router's configuration.": "라우터의 웹 관리자는 6과 같은 이전의 브
+라우저 상에서 올바르게 작동하지 않을 수 있습니다."
+
+[Sun Jan 15 16:12:26 2017] 翻译包如下条目%s不匹配，请检查：
+"The password should be made of 8~63 characters.": "비밀번호는 %s~%s 문자라야합니다."
+"Cipher Type: %s": ""
+"%s and %s (%s) should not be in the same network segment.": "%s와 %s (%s)는 동일한 네트워크%s 세그먼트에 있어서는 안됩니다. "
+
+[Sun Jan 15 16:12:26 2017] 翻译包有4个关键字没有翻译，请检查：
+"IP Address"
+"Cipher Type: %s"
+"Encrypted"
+"Network Map & Connected Clients"
+
+[Sun Jan 15 16:12:26 2017] 与中文翻译包对比，execl翻译包有52条关键字缺失，请检查：
+"JSON data is too long"
+"The Smart Power-save is enabled. The Smart LED is not available.  "
+"Sent an invalid command"
+"WAN Connection
+Disconnected"
+"The Smart LED won't take effect if  the Smart Power-save is enabled. Are you sure to save it?"
+"Failed to allocate the memory. The memory is not enough"
+"Failed to run the command"
+"5GHz "
+"Subnet Mask: "
+"Failed to connect to the socket"
+"The first number of the IP cannot be %s. "
+"This account doesn’t work. Please try a different one. "
+"Wireless Repeater:"
+"  "
+"Authentication Failure"
+"Connection Error"
+"Add "
+"Total Upload: "
+"Fast Nat"
+"Please specify a WiFi Name. "
+"When enabled, the router is under power-save mode."
+"Obtain ID"
+"min "
+"Username"
+"Fail to change, please first obtain the cloud account"
+"The current connection is Wireless Repeating. Please disable Wireless Repeating and try again.  "
+"Connecting server..."
+"Failed to connect to the server"
+"Please enter a registered email address."
+"h "
+"Restore "
+"Cloud Server is busy now. Updating or testing speed"
+"Custome VLAN"
+"Download Speed: "
+"details "
+"1000M AUTO"
+"Speed Limit: "
+"Syslog"
+"Total Download: "
+"Action "
+" PPPoE"
+"Manual  "
+"Obtain cloud account"
+"To test bandwidth "
+"The Tenda App feature is disabled"
+"IP conflict!  Please change the LAN IP address.  If not, you will fail to access the Internet."
+"Failed to analyse, package or detect data"
+"Upload Speed: "
+"Hide "
+"Unkonwn Error"
+"5GHz"
+"Obtaining cloud account..."
+
+[Sun Jan 15 16:12:26 2017] 翻译包有7条(告警阈值：200%)翻译过长：请检查
+UAE
+阿联酋
+아랍 에미레이트
+
+DNS1:
+DNS1：
+기본설정 DNS:
+
+Dial-up Successfully
+宽带拨号成功
+라우터의 인터넷 포트와 모뎀이 올바르게 연결되도록하십시오.
+
+h
+小时
+시간 제한
+
+DNS2:
+DNS2：
+대체 DNS 서버:
+
+Wired
+有线
+선으로 연결
+
+Configure
+设置
+환경설정 파일 선택:
+
+
+[Sun Jan 15 16:12:26 2017] json格式的翻译包已保存为translate.json

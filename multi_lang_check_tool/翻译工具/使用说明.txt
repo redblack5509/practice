@@ -1,0 +1,8 @@
+在当前位置打开控制台,执行
+
+TPCT_v1.exe -i "AC15 FANYI.xlsx" -s translate_cn.json -w 200
+
+-i execl文件
+-s 中文json翻译包文件
+-w 翻译包长度告警阈值,默认超出150%告警
+日志保存在check_log.txt
