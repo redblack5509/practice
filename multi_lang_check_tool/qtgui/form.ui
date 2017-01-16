@@ -6,12 +6,39 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1019</width>
-    <height>719</height>
+    <width>749</width>
+    <height>625</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>749</width>
+    <height>625</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>749</width>
+    <height>625</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>10</pointsize>
+   </font>
   </property>
   <property name="windowTitle">
    <string>翻译包检查工具</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>14132717419666.png</normaloff>14132717419666.png</iconset>
   </property>
   <property name="whatsThis">
    <string extracomment="翻译包检查工具"/>
@@ -19,9 +46,9 @@
   <widget class="QLineEdit" name="execl_path_input">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>40</y>
-     <width>711</width>
+     <x>30</x>
+     <y>30</y>
+     <width>501</width>
      <height>31</height>
     </rect>
    </property>
@@ -32,8 +59,8 @@
   <widget class="QPushButton" name="select_execl_btn">
    <property name="geometry">
     <rect>
-     <x>770</x>
-     <y>40</y>
+     <x>540</x>
+     <y>30</y>
      <width>171</width>
      <height>31</height>
     </rect>
@@ -45,9 +72,9 @@
   <widget class="QLineEdit" name="cn_path_input">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>90</y>
-     <width>711</width>
+     <x>30</x>
+     <y>80</y>
+     <width>501</width>
      <height>31</height>
     </rect>
    </property>
@@ -55,8 +82,8 @@
   <widget class="QPushButton" name="select_cn_btn">
    <property name="geometry">
     <rect>
-     <x>770</x>
-     <y>90</y>
+     <x>540</x>
+     <y>80</y>
      <width>171</width>
      <height>31</height>
     </rect>
@@ -65,44 +92,11 @@
     <string>选择中文翻译包</string>
    </property>
   </widget>
-  <widget class="QWidget" name="horizontalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>660</y>
-     <width>891</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
-    <item>
-     <widget class="QPushButton" name="pushButton_7">
-      <property name="text">
-       <string>清空日志</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButton_5">
-      <property name="text">
-       <string>导出json翻译包</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButton_6">
-      <property name="text">
-       <string>导出日志</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
   <widget class="QPushButton" name="checkBtn">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>140</y>
+     <x>280</x>
+     <y>130</y>
      <width>171</width>
      <height>31</height>
     </rect>
@@ -117,17 +111,22 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>190</y>
-     <width>891</width>
-     <height>451</height>
+     <x>30</x>
+     <y>180</y>
+     <width>681</width>
+     <height>381</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
    </property>
    <property name="html">
     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'SimSun'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;欢迎使用翻译包检查工具V1.0&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2017-1-15 leon&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
@@ -135,8 +134,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>140</y>
+     <x>30</x>
+     <y>130</y>
      <width>141</width>
      <height>31</height>
     </rect>
@@ -148,11 +147,50 @@ p, li { white-space: pre-wrap; }
   <widget class="QLineEdit" name="width_input">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>140</y>
-     <width>113</width>
+     <x>150</x>
+     <y>130</y>
+     <width>51</width>
      <height>31</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_6">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>570</y>
+     <width>222</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>导出日志</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_5">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>570</y>
+     <width>201</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>导出json翻译包</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_7">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>570</y>
+     <width>241</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>清空日志</string>
    </property>
   </widget>
  </widget>

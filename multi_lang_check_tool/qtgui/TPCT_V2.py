@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*- 
 from PyQt5 import QtWidgets, QtGui
 from form import Ui_Form
-from TPCT_v2_gui import TP
+from TPCT_v1_console import TP
 
 import sys,codecs
 
@@ -55,11 +55,15 @@ class mywindow(QtWidgets.QWidget,Ui_Form):
 
     def save_json(self):
         fileName, selectFilter = QtWidgets.QFileDialog.getSaveFileName(self, directory = "translate.json")
+        if fileName == "":
+            return 
         self.tp.TP_save_path = fileName
         self.tp.save_to_json()
 
     def save_log(self):
         fileName, selectFilter = QtWidgets.QFileDialog.getSaveFileName(self, directory = "log.txt")
+        if fileName == "":
+            return
         fd = codecs.open(fileName, "w", encoding='utf-8')
         print(self.msgText.toPlainText(), file = fd)
         fd.close()
