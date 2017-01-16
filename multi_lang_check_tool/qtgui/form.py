@@ -23,7 +23,7 @@ class Ui_Form(object):
         font.setPointSize(10)
         Form.setFont(font)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("14132717419666.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("sf.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Form.setWindowIcon(icon)
         Form.setWhatsThis("")
         self.execl_path_input = QtWidgets.QLineEdit(Form)

@@ -38,7 +38,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>14132717419666.png</normaloff>14132717419666.png</iconset>
+    <normaloff>sf.png</normaloff>sf.png</iconset>
   </property>
   <property name="whatsThis">
    <string extracomment="翻译包检查工具"/>
