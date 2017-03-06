@@ -1,0 +1,10 @@
+[Version]
+Signature="$Windows NT$"
+
+[DefaultInstall]
+DELREG=del.reg
+
+[del.reg]
+hkcr,"*\\shell\\nvram show"
+hkcr,"Folder\shell\\nvram show"
+

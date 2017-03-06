@@ -1,0 +1,10 @@
+[Version]
+Signature="$Windows NT$"
+
+[DefaultInstall]
+AddReg=add.reg
+
+[add.reg]
+hkcr,"*\\shell\\nvram show\\command",,,"""%1%\show_flash.exe"" ""%%1"" %%*"
+
+hkcr,"Folder\\shell\\nvram show\\command",,,"""%1%\show_flash.exe"" ""%%1"" %%*"
