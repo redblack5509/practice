@@ -16,7 +16,7 @@ pyuic5 form.ui -o form.py
 pyinstaller --path C:\python35\Lib\site-packages\PyQt5\Qt\bin -F TPCT_V2.py --noconsole  
 
 ---
-更新日志：
-    V1.1 2017年3月7日17:24:23
-    1）修复打开两个不同翻译包因缓存引起的问题
-    2）对提示显示execl里的行号
+更新日志：  
+    V1.1 2017年3月7日17:24:23  
+    1）修复打开两个不同翻译包因缓存引起的问题  
+    2）对提示显示execl里的行号  
