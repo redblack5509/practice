@@ -21,6 +21,38 @@ def calc_unicode_string_width(u_string):
         total_len += get_chr_width(chr)
     return total_len
 
+# 很丑的函数，慎用
+def sort_msg_cmp(stra, strb):
+        na = 0
+        nb = 0
+        la = re.findall(r"^\d+", stra)
+        if len(la):
+            na = int(la[0])
+        lb = re.findall(r"^\d+", strb)
+        if len(lb):
+            nb = int(lb[0])
+        if na > nb:
+            return 1
+        elif na == nb:
+            return 0
+        else:
+            return -1
+
+# 下面两个函数是为了python 3.x下使用自定义cmp函数
+class KeyWrapper(object):
+    def __init__(self, cmp, val):
+        self.val = val
+        self.cmp = cmp
+
+    def __lt__(self, other):
+        return self.cmp(self.val, other.val) == -1
+
+
+def cmp_to_key(func):
+    def key(x):
+        return KeyWrapper(func, x)
+    return key
+
 # 创建一个翻译包类，TP(translation package)
 class TP:
     def __init__(self, execl_path = "", cn_TP_path = ""):
@@ -28,6 +60,7 @@ class TP:
         self.cn_TP_path = cn_TP_path  #中文翻译包路径
         self.cn_TP = {}
         self.target_TP = {}
+        self.target_TP_add_line = {}
         self.TP_save_path = "translate.json"
         if __name__ == '__main__':
             self.log_fd = codecs.open("check_log.txt", "w", encoding='utf-8')
@@ -68,6 +101,7 @@ class TP:
             name = sheet1.cell_value(row,0)
             value = sheet1.cell_value(row,1)
             self.target_TP[name] = value
+            self.target_TP_add_line[name] = {"line": row + 1, "value": value}
 
     # 获取目标翻译包的字典
     def get_target_TP(self):
@@ -100,12 +134,25 @@ class TP:
         self.target_TP = package    #保存这个翻译包字典
         fd.close()
 
+
+    # 对输出信息进行排序,用'\n'字符split方法分割消息到列表，对列表排序，再输出到字符串
+    # 这函数很丑，慎用
+    def sort_msg(self, msg):
+        msg_list = msg.split('\n')
+        # msg_list.sort(cmp=cmp)
+        msg_list = sorted(msg_list, key=cmp_to_key(sort_msg_cmp))
+        msg_sorted = ''
+        for item in msg_list:
+            msg_sorted += "%s\n" %(item)
+        return msg_sorted
+
     # 检查翻译包字典里是否有换行符
     def check_newline_character(self):
         err_msg = ""
         for key in self.target_TP:
             if key.find("\n") != -1 or self.target_TP.get(key).find("\n") != -1:
-                err_msg += '"%s": "%s"\n' %(key, self.target_TP.get(key))
+                err_msg += '%d "%s": "%s"\n' %(self.target_TP_add_line.get(key)["line"], \
+                        key, self.target_TP.get(key))
 
         if err_msg != "":
             err_msg = "如下翻译条目里面有换行符，请检查:\n" + err_msg
@@ -117,15 +164,17 @@ class TP:
         miss_percent_symbol = {}
         for key in self.target_TP:
             if key.count("%s") != self.target_TP.get(key).count("%s"):
-                miss_percent_symbol[key] = self.target_TP.get(key)
+                miss_percent_symbol[key] = self.target_TP.get(key)  
 
         # 打印输出
         err_msg = ""
         for key in miss_percent_symbol:
-            err_msg += "\"%s\": \"%s\"\n" %(key, miss_percent_symbol.get(key))
+            err_msg += "%d \"%s\": \"%s\"\n" %(self.target_TP_add_line.get(key)["line"], \
+                    key, miss_percent_symbol.get(key))
         if err_msg == "":
             self.log("翻译包%s匹配正常")
         else:
+            err_msg = self.sort_msg(err_msg)
             err_msg = "翻译包如下条目%s不匹配，请检查：\n" + err_msg
             self.log(err_msg)
 
@@ -166,10 +215,11 @@ class TP:
         # 打印
         err_msg = ""
         for key in not_translate_key:
-            err_msg += '"%s"\n' %(key)
+            err_msg += '%d "%s"\n' %(self.target_TP_add_line.get(key)["line"], key)
         if err_msg == "":
             self.log("检查没有翻译的条目：正常")
         else:
+            err_msg = self.sort_msg(err_msg)
             err_msg = "翻译包有%d个关键字没有翻译，请检查：\n%s" %(len(not_translate_key), err_msg)
             self.log(err_msg)
 
@@ -189,6 +239,7 @@ class TP:
         # 打印，一条过长的翻译打印三行（英文，中文，目标语言）
         err_msg = ""
         for key in too_long:
+            # err_msg += "%d\n" %(self.target_TP_add_line.get(key)["line"])
             err_msg += "%s\n" %(key)
             err_msg += "%s\n" %(self.cn_TP.get(key))
             err_msg += "%s\n" %(self.target_TP.get(key))
