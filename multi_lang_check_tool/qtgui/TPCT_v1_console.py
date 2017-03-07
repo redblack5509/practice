@@ -34,6 +34,11 @@ class TP:
         self.width_threshold = 150    #宽度告警阈值，超过(最大宽度*width_threshold/100)则报警
 
 
+    # 清除缓存，解决加载两个execl包后，字典叠加问题
+    def clear_cache(self):
+        self.cn_TP = {}
+        self.target_TP = {}
+
     # 设置execl翻译包路径
     def set_execl_path(self, execl_path):
         self.execl_path = execl_path
@@ -254,6 +259,7 @@ def main(argv):
         my_TP.usage()
         sys.exit(-1)
 
+    my_TP.clear_cache()
     my_TP.load_excel()
     my_TP.check_newline_character()
     # my_TP.check_json_format()

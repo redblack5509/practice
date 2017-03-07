@@ -86,6 +86,7 @@ class mywindow(QtWidgets.QWidget,Ui_Form):
     def check(self):
         if self.check_input_valid():
             self.update_path()
+            self.tp.clear_cache()
             self.tp.load_excel()
             self.tp.check_newline_character()
             self.tp.check_percent_symbol_match()
