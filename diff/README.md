@@ -44,7 +44,7 @@ Thu May  4 19:13:50 CST 2017
 1959896inputs+113896outputs (0major+214852minor)pagefaults 0swaps
 Thu May  4 19:16:41 CST 2017
 ```
-patch目录大下
+patch目录大小
 ```
 root@leon-virtual-machine:diff# du /home/work_sdc1/tenda3/AC6_ITB01/AC_PRODUCT_SVN5449_patch_l/ -hd1
 460K    /home/work_sdc1/tenda3/AC6_ITB01/AC_PRODUCT_SVN5449_patch_l/infra
@@ -55,3 +55,7 @@ root@leon-virtual-machine:diff# du /home/work_sdc1/tenda3/AC6_ITB01/AC_PRODUCT_S
 18M /home/work_sdc1/tenda3/AC6_ITB01/AC_PRODUCT_SVN5449_patch_l/targets
 52M /home/work_sdc1/tenda3/AC6_ITB01/AC_PRODUCT_SVN5449_patch_l/
 ```
+
+还可以优化：
+比较文件的时候，文件打开读取了一次。复制文件的时候文件又打开读取了一次。  
+使用了两次nftw函数，再查找修改目录的新增加文件时，应该可以通过标记的方式来记录，而不用再循环遍历一次目录。
