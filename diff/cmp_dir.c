@@ -26,9 +26,11 @@ History:
 
 
 #define PATH_LEN 256
+#define IGNORE_CONFIG "ignore.conf"
 
 char org_path[PATH_LEN];
 char modify_path[PATH_LEN];
+char ignore_conf_file[PATH_LEN] = IGNORE_CONFIG;
 
 int cmp_binary = 0;  /* 默认只比较文件的大小 */
 int cmp_modify_only = 0;  /* 只管修改过的文件，忽略增加删除的文件 */
@@ -135,14 +137,68 @@ int copy(const char *src_file, const char *dest_file)
     return 0;
 }
 
+char *strip(char *s)
+{
+    if(!s)
+        return NULL;
+
+    char *end = s + strlen(s);
+
+    while(s < end)
+    {
+        if(*s != ' ' && *s != '\t' && *s != '\n' && *s != '\r')
+            break;
+        *s = 0;
+        s++;
+    }
+    --end;
+    while(s < end)
+    {
+        if(*end != ' ' && *end != '\t' && *end != '\n' && *end != '\r')
+            break;
+        *end = 0;
+        end--;
+    }
+    return s;
+}
+
+/* 从配置文件读取要过滤的目录,需要过滤返回1，否则返回0 */
+int filter_with_config_file(const char *path)
+{
+    FILE *fp = fopen(ignore_conf_file, "r");
+    char buf[256] = {0};
+
+    if(!fp)
+    {
+        printf("can't open %s\n", ignore_conf_file);
+        return 0;
+    }
+
+    while(fgets(buf, sizeof(buf), fp))
+    {
+        strip(buf);
+
+        /* 跳过注释行 */
+        if('#' == buf[0] || '\0' == buf[0])
+            continue;
+
+        if(strstr(path, buf))
+        {
+            fclose(fp);
+            return 1;
+        }
+    }
+
+    fclose(fp);
+    return 0;
+}
+
 /* 过滤掉像svn的文件,需要过滤返回1，否则返回0 */
 int filter(const char *path)
 {
     int i = 0;
     char *key[] = {
-        "svn",
-        ".bin",
-        ".trx",
+        ".svn",
         ".o",
         ".d",
         ".ko",
@@ -150,11 +206,10 @@ int filter(const char *path)
         ".la",
         ".pc",
         ".lai",
-        ".log",
         ".a",
         ".so",
-        "ecos_build/",
-        "ecos_install/"
+        ".bin",
+        ".trx"
     };
 
     for(i = 0; i < sizeof(key)/sizeof(char *); i++)
@@ -163,7 +218,7 @@ int filter(const char *path)
             return 1;
     }
 
-    return 0;
+    return filter_with_config_file(path);
 }
 
 int read_file_to_buff(const char *file, char *buf, int size)
@@ -301,6 +356,7 @@ void usage(void)
         "----------------------\n"
         "-m :ignore alone file\n"
         "-b :compare binary, default compare size\n"
+        "-i :ignore config file, default ignore.conf"
         );
 }
 
@@ -309,7 +365,7 @@ int main(int argc, char *argv[])
     int cmp;
     int flags = 0;
     int c = -1;
-    char *optstring = "mbh";
+    char *optstring = "mbh:i";
 
     if (argc < 3)
     {
@@ -326,6 +382,9 @@ int main(int argc, char *argv[])
                 break;
             case 'b':
                 cmp_binary = 1;
+                break;
+            case 'i':
+                strncpy(ignore_conf_file, optarg, PATH_LEN - 1);
                 break;
             case 'h':
             default:
