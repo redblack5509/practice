@@ -365,7 +365,7 @@ int main(int argc, char *argv[])
     int cmp;
     int flags = 0;
     int c = -1;
-    char *optstring = "mbh:i";
+    char *optstring = "mbhi:";
 
     if (argc < 3)
     {
