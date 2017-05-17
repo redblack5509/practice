@@ -12,7 +12,7 @@
 
 unsigned int lan_wan_ip_conflict(unsigned int lanip, unsigned int lan_mask, unsigned int wanip, unsigned int wan_mask)
 {
-    unsigned int min_mask = lan_mask > wan_mask ? wan_mask : lan_mask;
+    unsigned int min_mask = (lan_mask) > (wan_mask) ? wan_mask : lan_mask;
     unsigned int new_lan_ip = 0;
 
     /* 打印 */
@@ -20,6 +20,7 @@ unsigned int lan_wan_ip_conflict(unsigned int lanip, unsigned int lan_mask, unsi
     print_ip(lan_mask);
     print_ip(wanip);
     print_ip(wan_mask);
+    print_ip(min_mask);
 
     /* 判断是否冲突 */
     if((lanip & min_mask) != (wanip & min_mask))
@@ -29,9 +30,9 @@ unsigned int lan_wan_ip_conflict(unsigned int lanip, unsigned int lan_mask, unsi
 
     printf("Conflict!\n");
 
-    /* 计算修改后的lanip */
-    new_lan_ip = lanip + ~min_mask + htonl(1);
-    //new_lan_ip = htonl(new_lan_ip);
+    /* 计算修改后的lanip, 需要转为本地字节序 */
+    new_lan_ip = ntohl(lanip)+ ~ntohl(min_mask) + (1);
+    new_lan_ip = htonl(new_lan_ip);
     print_ip(new_lan_ip);
 
     return new_lan_ip;
