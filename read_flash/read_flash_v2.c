@@ -61,8 +61,8 @@ char *get_magic_type(char *buf, int len)
     return b_magic;
 }
 
-/* 通过魔术字FLSH, HSLF查找envram，nvram头偏移 */
-char *find_nvram(char *buf, int len, char *magic)
+/* 通过魔术字FLSH, HSLF查找envram，envram头偏移 */
+char *find_envram(char *buf, int len, char *magic)
 {
     int i = 0;
 
@@ -74,10 +74,23 @@ char *find_nvram(char *buf, int len, char *magic)
     return NULL;
 }
 
+/* nvram需要倒过来找 */
+char *find_nvram(char *buf, int len, char *magic)
+{
+    int i = 0;
+
+    for(i = len - MAGIC_LEN; i >= 0; i--)
+    {
+        if(!memcmp(buf + i, magic, MAGIC_LEN))
+            return buf + i;
+    }
+    return NULL;
+}
+
 void init_nvram_envram_head(flash_info_t *flash)
 {
     char *magic = get_magic_type(flash->data, flash->size);
-    char *match = find_nvram(flash->data, flash->size, magic);
+    char *match = find_envram(flash->data, flash->size, magic);
     int off = 0;
 
     strncpy(flash->magic, magic, sizeof(flash->magic));
