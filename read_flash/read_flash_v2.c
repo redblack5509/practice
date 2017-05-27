@@ -273,7 +273,7 @@ void print_flash_info(flash_info_t *flash)
         p = strrchr(p, '/');
 #endif
 
-    printf("\n  flash name: %s\n", p ? ++p : p);
+    printf("\n  flash name: %s\n", p ? ++p : flash->path);
     printf("  flash size: %d (%dMB)\n", flash->size, flash->size/(1024*1024));
 }
 
@@ -412,6 +412,35 @@ void envram_show(flash_info_t *f)
     }
     printf("\ncount: %d\n", f->eparam_cnt);
     
+}
+
+void save_data(flash_info_t *f)
+{
+    int i = 0;
+    FILE *fp = NULL;
+    char path[256] = {0};
+    char epath[256] = {0};
+    char npath[256] = {0};
+    char *p = NULL;
+
+    strcpy(path, f->path);
+#ifdef WIN32
+    p = strrchr(path, '\\')
+#else
+    p = strrchr(path, '/')
+#endif
+
+    fp = fopen();
+    if(f->envram_err_flag)
+    {
+        printf("envram error\n");
+        return;
+    }
+    for(i = 0; i < f->eparam_cnt && envram_table[i]; i++)
+    {
+        printf("%s\n", envram_table[i]);
+    }
+    printf("\ncount: %d\n", f->eparam_cnt);
 }
 
 int check_flash_valid(flash_info_t *f)
@@ -567,6 +596,12 @@ int main(int argc, char **argv)
             case 'Q':
                 destory_flashinfo(flash);
                 return 0;
+            case 's':
+            case 'S':
+                save_data(flash);
+                print_notice();
+                print_prompt();
+                break;
             case '\0':
                 print_prompt();
                 break;
