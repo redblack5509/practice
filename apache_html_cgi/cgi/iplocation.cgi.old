@@ -1,0 +1,17 @@
+#!/usr/bin/python3
+
+import os, json, requests
+
+remote_ip = os.environ['REMOTE_ADDR']
+
+r=requests.get("http://ip.taobao.com/service/getIpInfo.php?ip=" + remote_ip)
+data = r.json()
+
+response = {}
+response["ip"] = remote_ip
+response["addr"] = data["data"]["region"] + data["data"]["city"]
+response["isp"] = data["data"]["isp"]
+response["country"] = data["data"]["country"]
+
+print("Content-type: application/json\r\n\r\n")
+print(json.dumps(response))
