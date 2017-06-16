@@ -285,6 +285,7 @@ void print_notice(void)
            "  *  n: nvram show                *\n"
            "  *  e: envram show               *\n"
            "  *  f: find param                *\n"
+           "  *  s: save data                 *\n"
            "  *  q: quit                      *\n"
            "  *                               *\n"
            "  *********************************\n"
@@ -417,30 +418,55 @@ void envram_show(flash_info_t *f)
 void save_data(flash_info_t *f)
 {
     int i = 0;
-    FILE *fp = NULL;
+    FILE *fp = NULL, *nfp = NULL;
     char path[256] = {0};
     char epath[256] = {0};
     char npath[256] = {0};
     char *p = NULL;
 
     strcpy(path, f->path);
-#ifdef WIN32
-    p = strrchr(path, '\\')
-#else
-    p = strrchr(path, '/')
-#endif
+    p = strrchr(path, '.');
+    if(!p)
+        *p = '\0';
+    snprintf(epath, sizeof(epath), "%s_enram.txt", path);
+    snprintf(npath, sizeof(npath), "%s_nram.txt", path);
 
-    fp = fopen();
+    fp = fopen(epath, "w");
+    if(!fp)
+    {
+        printf("fopen %s error\n", epath);
+        goto failed;
+    }
     if(f->envram_err_flag)
     {
         printf("envram error\n");
-        return;
+        goto failed;
     }
     for(i = 0; i < f->eparam_cnt && envram_table[i]; i++)
     {
-        printf("%s\n", envram_table[i]);
+        fprintf(fp, "%s\n", envram_table[i]);
     }
-    printf("\ncount: %d\n", f->eparam_cnt);
+
+    nfp = fopen(npath, "w");
+    if(!nfp)
+    {
+        printf("fopen %s error\n", npath);
+        goto failed;
+    }
+    if(f->nvram_err_flag)
+    {
+        printf("nvram error\n");
+        goto failed;
+    }
+    for(i = 0; i < f->nparam_cnt && nvram_table[i]; i++)
+    {
+        fprintf(nfp, "%s\n", nvram_table[i]);
+    }
+failed:
+    if(fp)
+        fclose(fp);
+    if(nfp)
+        fclose(nfp);
 }
 
 int check_flash_valid(flash_info_t *f)
