@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>距离查询</title>
+    <style type="text/css">
+        .container {
+            margin-top: 40px;
+            margin-left: 40px;
+        }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <input value="北京" id="src"/> - <input value="深圳" id="dst"/>
+		<input type="button" value="查询" id="calc" onclick="calc()"/>
+		<p id="status" style="display:none">查询中...</p>
+		<div id="result" style="display:none">
+			<p>起点：<span id="rsrc">北京</span></p>
+			<p>终点：<span id="rdst">深圳</span></p>
+			<p>距离：<span id="distence">123.12KM</span></p>
+		</div>
+    </div>
+    <script src="j.js"></script>
+    <script src="juli.js"></script>
+  </body>
+</html>
