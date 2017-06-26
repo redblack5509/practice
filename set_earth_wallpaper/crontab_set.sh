@@ -12,4 +12,4 @@ PID=$(pgrep gnome-session)
 export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-)
 
 # 设置壁纸
-./set_earth_wallpaper.py
+/home/leon/github/practice/set_earth_wallpaper/set_earth_wallpaper.py
