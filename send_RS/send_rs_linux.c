@@ -18,7 +18,7 @@
 
 #include <netinet/in.h>
 #include <netdb.h>
-#include <ifaddrs.h>
+#include "ifaddrs.h"
 #include <netinet/icmp6.h>
 
 typedef struct
@@ -50,6 +50,12 @@ static int get_mac_address(const char *ifname, uint8_t *addr)
     close(fd);
 
     memcpy(addr, req.ifr_hwaddr.sa_data, 6);
+
+    /* ppp interface maybe get zero mac address */
+    uint8_t zero_mac[6] = {0};
+    if(!memcmp(addr, zero_mac, sizeof(zero_mac)))
+        return -1;
+
     return 0;
 }
 
@@ -73,7 +79,7 @@ int get_if_link_local_addr6(char *ifname, struct sockaddr_in6 *addr6)
     for(ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) 
     {       
         if(ifa->ifa_name && !strcmp(ifa->ifa_name, ifname) && 
-            ifa->ifa_addr->sa_family == AF_INET6)
+            ifa->ifa_addr && ifa->ifa_addr->sa_family == AF_INET6)
         {   
             tmp = &((struct sockaddr_in6 *)(ifa->ifa_addr))->sin6_addr;
             if(IN6_IS_ADDR_LINKLOCAL(tmp))
@@ -88,7 +94,7 @@ int get_if_link_local_addr6(char *ifname, struct sockaddr_in6 *addr6)
     freeifaddrs(ifaddr);  
     if(!ok)
     {
-        printf("Not find the interface: %s\n", ifname);
+        printf("Not find the interface(%s) address\n", ifname);
         return -1;
     }    
     return 0;
