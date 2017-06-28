@@ -1,5 +1,5 @@
 ## 链接分析  
-　　打开bing[首页](http://cn.bing.com/)，开chrome调试，捕捉network，再点击上一张，下一张时可以看到一个比较规律的URL，http://cn.bing.com/HPImageArchive.aspx?format=js&idx=1&n=1&nc=1498657985239&pid=hp&video=1，这个url返回一个json数据如下，里面就有首页图片的url
+　　打开[bing首页](http://cn.bing.com/)，开chrome调试，捕捉network，再点击上一张，下一张时可以看到一个比较规律的URL，[http://cn.bing.com/HPImageArchive.aspx?format=js&idx=1&n=1&nc=1498657985239&pid=hp&video=1](http://cn.bing.com/HPImageArchive.aspx?format=js&idx=1&n=1&nc=1498657985239&pid=hp&video=1)，这个url返回一个json数据如下，里面就有首页图片的url
 ```json
 {
     "images": [
@@ -39,4 +39,7 @@
 convert 1.jpg -font 文泉驿微米黑 -pointsize 30 -draw "gravity south fill black  text 0,12 '卡拉尼什巨石阵，苏格兰路易斯岛'  fill white  text 1,11 '卡拉尼什巨石阵，苏格兰路易斯岛' " 2.jpg
 ```  
 **注意：**  
-如果报错`convert: unable to read font `Arial' `找不到字体，你可以执行如下命令看下有那些字体`convert -list font`。如果加中文水印，要选用支持中文的字体。
+如果报错`convert: unable to read font 'Arial' `找不到字体，你可以执行如下命令看下有那些字体`convert -list font`。如果加中文水印，要选用支持中文的字体。
+效果图：  
+![效果图](./2.jpg)  
+
