@@ -38,8 +38,11 @@
 ```bash
 convert 1.jpg -font 文泉驿微米黑 -pointsize 30 -draw "gravity south fill black  text 0,12 '卡拉尼什巨石阵，苏格兰路易斯岛'  fill white  text 1,11 '卡拉尼什巨石阵，苏格兰路易斯岛' " 2.jpg
 ```  
+其中0,12表示水印的位置，12表示距底部的像素。为了能同时应对深色背景和浅色背景，所以同时添加了白色和黑色的水印文字。  
+
 **注意：**  
-如果报错`convert: unable to read font 'Arial' `找不到字体，你可以执行如下命令看下有那些字体`convert -list font`。如果加中文水印，要选用支持中文的字体。
+如果报错`convert: unable to read font 'Arial' `找不到字体，你可以执行如下命令看下有那些字体`convert -list font`。如果加中文水印，要选用支持中文的字体。  
+  
 效果图：  
 ![效果图](./2.jpg)  
 
