@@ -1,3 +1,5 @@
+## 功能
+　　每天自动从bing首页下载首页图片，再添加该图片文字描述的水印，然后设置到桌面壁纸。  
 ## 链接分析  
 　　打开[bing首页](http://cn.bing.com/)，开chrome调试，捕捉network，再点击上一张，下一张时可以看到一个比较规律的URL，[http://cn.bing.com/HPImageArchive.aspx?format=js&idx=1&n=1&nc=1498657985239&pid=hp&video=1](http://cn.bing.com/HPImageArchive.aspx?format=js&idx=1&n=1&nc=1498657985239&pid=hp&video=1)，这个url返回一个json数据如下，里面就有首页图片的url
 ```json
@@ -46,3 +48,5 @@ convert 1.jpg -font 文泉驿微米黑 -pointsize 30 -draw "gravity south fill b
 效果图：  
 ![效果图](./2.jpg)  
 
+## 定时执行  
+　　添加到crontab即可，为了方便另外写了个脚本控制。为了在开机后能尽快更新壁纸，我把执行周期设置为10分钟，更新成功后添加临时文件做标记，以便今天不再更新。  
