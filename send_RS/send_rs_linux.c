@@ -155,12 +155,12 @@ int main(int argc, char *argv[])
                                     "\x00\x00\x00\x00\x00\x00\x00\x02", 16);
 
     plen = build_rs(&packet, ifname);
-    if (sendto(s, &packet, plen, 0, (const struct sockaddr *)&dst, sizeof (dst)) != plen)
+    if (sendto(s, &packet, plen, 0, (const struct sockaddr *)&dst, sizeof(dst)) != plen)
     {
         perror("Sending ICMPv6 packet");
         close(s);
         return -1;
     }
-
+    close(s);
     return 0;
 }
