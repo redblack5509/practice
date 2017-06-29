@@ -17,5 +17,8 @@ export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/en
 # 设置壁纸
 /home/leon/github/practice/bing_wallpaper/set_bing_wallpaper.py
 
-# 标记今天已经更新了壁纸
-touch ${TMP_FILE}
+# 判断上面的脚本是否成功执行了
+if [ $? == 0 ];then
+    # 标记今天已经更新了壁纸
+    touch ${TMP_FILE}
+fi
