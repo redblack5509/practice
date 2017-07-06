@@ -10,8 +10,10 @@ save_dir = "/home/leon/pic/wallpaper/bing/"
 def set_desktop(pic_path):
     cmd = "gsettings set org.gnome.desktop.background picture-uri file:" + pic_path
     # 设置壁纸
-    os.system(cmd)          
-
+    ret = os.system(cmd)          
+    if ret != 0:
+        print("os.system failed, now exit")
+        exit(-1)
     
 #获取今天的图片的url和copyright信息
 def get_bing_info():
