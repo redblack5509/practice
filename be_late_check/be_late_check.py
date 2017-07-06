@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 
-# 定时查询考勤签卡，如有异常，发送邮件通知
-
-# 配置文件/etc/check_late.conf
+# 配置文件
 # {
 #     "username": "123",
 #     "password": "123",
@@ -15,7 +13,7 @@
 
 import requests, time
 from pyquery import PyQuery as pyq
-import json, sys
+import json, sys, re
 
 #######################################################
 
@@ -116,12 +114,17 @@ table = jq("#ctl00_ContentPlaceHolder1_GridView1")
 jq = pyq(table)
 tr = jq("tr")
 
+normal = 1
+email_msg = ""
 # 打印出查询信息
 for i in tr:
-    # print(pyq(i).text())
+    print(pyq(i).text())
     result = pyq(i).text()
-    if result.find(config["username"]) != -1 and result.find("异常") != -1:
-        # 异常，通知
+    if result.find('考勤日期') == -1 and re.search(r'(旷工)|(异常)', result) != None:
+        normal = 0
         print("异常", result, file=open(log_path, mode="a"))
-        send_email(result)
+        email_msg += result + "<br/>&nbsp;&nbsp;"
+
+if normal == 0:
+    send_email(email_msg)
 
