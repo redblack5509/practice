@@ -16,17 +16,26 @@ History:
 
  编译方法：
  gcc http_trace.c -lnetfilter_log
-************************************************************/
+
+ 需要以sudo权限运行
+ sudo iptables -I OUTPUT -o enp8s0 -p tcp -j NFLOG --nflog-group 1
+ sudo ./a.out &
+
+ 统计方法：
+ cat /home/website_access_stat.txt | awk -F "," '{stat[$1]++} END {for(cmd in stat) print stat[cmd] " " cmd}' | sort -nr
+ ************************************************************/
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
+#include <arpa/inet.h>
 #include <sys/types.h>
 #include <linux/netlink.h>
 #include <sys/select.h>
 #include <sys/time.h>
 #include <unistd.h>
+#include <time.h>
 
 #include <libnetfilter_log/libnetfilter_log.h>
 
@@ -39,7 +48,12 @@ History:
 #define LISTEN_GROUP 1
 #define BUFF_SIZE 4096
 
+#define DATA_FILE "/home/website_access_stat.txt"
+
 #define lprintf(format, argv...) printf("%s(%d): " format , __FUNCTION__, __LINE__, ##argv)
+
+static char host_data[BUFF_SIZE] = {0};
+static int data_idx = 0;    /* 指向host_data的当前存储位置 */
 
 void print_pkt(unsigned char *pkt, int len, char *title)
 {
@@ -78,9 +92,48 @@ void print_pkt(unsigned char *pkt, int len, char *title)
     printf("\n\n*******************%s end*****************\n", title);
 }
 
+void save_to_file(void)
+{
+    int len = data_idx;
+    int write_len = 0;
+
+    if(!data_idx)
+        return;
+
+    FILE *fp = fopen(DATA_FILE, "a+");
+    if(!fp)
+    {
+        perror("fopen");
+        return;
+    }
+    write_len = fwrite(host_data, len, 1, fp);
+        
+    fclose(fp);
+    data_idx = 0;
+}
+
 void save_server_name(char *server_name)
 {
-    printf("%s\n", server_name);
+    time_t sec = time(0);
+    struct tm now;
+    char buf[1024] = {0};
+    int ret = 0;
+
+    localtime_r(&sec, &now);
+    now.tm_year += 1900;
+    now.tm_mon += 1;
+
+    ret = snprintf(buf, sizeof(buf) - 1, "%s, %d-%02d-%02d %02d:%02d, %u\n", 
+            server_name, now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, 
+            now.tm_min, (unsigned int)sec);
+
+    if(ret + data_idx > BUFF_SIZE)
+    {
+        save_to_file();
+    }
+
+    strcpy(host_data + data_idx, buf);
+    data_idx += ret;
 }
 
 int find_server_name(__u8 *edata, int data_len, char *server_name, int sn_len)
@@ -337,7 +390,7 @@ int main(int argc, char *argv[])
 
     while(1)
     {
-        tv.tv_sec = 10;
+        tv.tv_sec = 5;
         tv.tv_usec = 0;
         FD_ZERO(&rfds);
         FD_SET(fd, &rfds);
@@ -350,6 +403,10 @@ int main(int argc, char *argv[])
             {
                 nflog_handle_packet(h, buf, len);   
             }
+        }
+        else if(ret == 0)
+        {
+            save_to_file();
         }
     }
 
