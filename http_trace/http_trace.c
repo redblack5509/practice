@@ -78,6 +78,10 @@ void print_pkt(unsigned char *pkt, int len, char *title)
     printf("\n\n*******************%s end*****************\n", title);
 }
 
+void save_server_name(char *server_name)
+{
+    printf("%s\n", server_name);
+}
 
 int find_server_name(__u8 *edata, int data_len, char *server_name, int sn_len)
 {
@@ -177,7 +181,7 @@ void https_handle(struct iphdr *iph)
     }
     else
     {
-        lprintf("server name: %s\n", server_name);
+        save_server_name(server_name);
         return;
     }
 
@@ -240,6 +244,7 @@ void http_handle(struct iphdr *iph)
     __u8 *tcpdata = (void*)tcph + tcph->doff*4;
     int len = ntohs(iph->tot_len) - (iph->ihl*4) - (tcph->doff*4);
     char line[1024];
+    char *p = NULL;
 
     if(len && tcpdata[0] != 'G' && tcpdata[0] != 'P')
         return;
@@ -249,7 +254,10 @@ void http_handle(struct iphdr *iph)
         //printf("%s\n", line);
         if(strncasestr(line, "host:"))
         {
-            printf("[host] %s\n", line);
+            p = (char *)line + strlen("host:");
+            while(*p == ' ')
+                p++;
+            save_server_name(p);
             break;
         }
     }
@@ -335,15 +343,7 @@ int main(int argc, char *argv[])
         FD_SET(fd, &rfds);
 
         ret = select(fd + 1, &rfds, NULL, NULL, &tv);
-        if(ret < 0)
-        {
-            perror("select \n");
-        }
-        else if(ret == 0)
-        {
-            ;
-        }
-        else
+        if(ret > 0)
         {
             len = recv(fd, buf, sizeof(buf), 0); 
             if(len)
