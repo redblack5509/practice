@@ -94,21 +94,22 @@ int main(int argc, char *argv[])
         goto err;
     }
 
-    while(!feof(fp))
+    while(fgets(buff, BUF_SIZE, fp))
     {
-        memset(buff, 0x0, BUF_SIZE);
-        if(!fgets(buff, BUF_SIZE, fp))
-        {
-            fprintf(stderr, "fgets error: %m\n");
-            goto err;
-        }
-
         if(0 != deal_text_line(buff, stdout))
         {
             fprintf(stderr, "quota mark not matched: %s\n", buff);
             goto err;
         }
+        memset(buff, 0x0, BUF_SIZE);
     }
+
+    if(!feof(fp))
+    {
+        fprintf(stderr, "fgets error: %m\n");
+            goto err;
+    }
+
     fclose(fp);
     free(buff);
     return 0;
