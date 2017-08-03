@@ -41,7 +41,7 @@ History:
 
 #include <linux/ip.h>
 #include <linux/tcp.h>
-#include <linux/in.h>
+#include <netinet/in.h>
 
 #include "https.h"
 
