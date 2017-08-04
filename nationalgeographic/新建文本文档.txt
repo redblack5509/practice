@@ -1,0 +1,17 @@
+import requests,re
+
+r=requests.get("http://www.nationalgeographic.com.cn/photography/photo_of_the_day/")
+p=re.compile("http://www.nationalgeographic.com.cn/photography/photo_of_the_day/.*?html")
+match=p.findall(r.text)
+
+rday=requests.get(match[0])
+
+p2=re.compile("http://image.nationalgeographic.com.cn/.*?jpg")
+
+match2=p2.findall(rday.text)
+url=match2[-1]
+
+
+xpath = /html/body/div[5]/article/section[3]/article/div/div[1]/div
+
+xpath = /html/body/div[5]/article/section[3]/article/div/div[1]/div/text()
