@@ -1,20 +1,17 @@
 #!/usr/bin/python3
 
-# ubuntu设置动态bing壁纸
+# 保存bing壁纸
+# VPS安装PIL库
+# sudo apt-get install python-imaging
+# pip3 install Pillow
+
 
 from PIL import Image, ImageDraw, ImageFont
 import requests
-import os, re
+import os, re, time
 
-save_dir = "/home/leon/pic/wallpaper/bing/"
+save_dir = "/home/root/www/bing/"
 
-def set_desktop(pic_path):
-    cmd = "gsettings set org.gnome.desktop.background picture-uri file:" + pic_path
-    # 设置壁纸
-    ret = os.system(cmd)          
-    if ret != 0:
-        print("os.system failed, now exit")
-        exit(-1)
     
 #获取今天的图片的url和copyright信息
 def get_bing_info():
@@ -32,7 +29,9 @@ def get_bing_info():
 
 #下载图片
 def down_pic(pic_url, save_dir):
-    image_name = re.sub(r'.*/', '', pic_url)
+    t = time.localtime(time.time())
+    image_name = "{}{:0>2}{:0>2}.jpg".format(t.tm_year, t.tm_mon, t.tm_mday)
+    # image_name = re.sub(r'.*/', '', pic_url)
     save_path = save_dir + image_name
     print(save_path)
 
@@ -43,14 +42,6 @@ def down_pic(pic_url, save_dir):
 
     return save_path
 
-#添加水印
-def add_watermark(path, text):
-    new_path = path + ".watermark"
-    cmd = "convert {0} -font 文泉驿微米黑 -pointsize 30 -draw \"gravity south fill black  text 0,72 '{1}'  fill white  text 1,71 '{1}' \" {2}".format(path, text, new_path)
-
-    #print(cmd)
-    os.system(cmd)   
-    os.system("mv {} {}".format(new_path, path))
 
 #通过python的PIL库添加水印
 def add_watermark_by_PIL(path, text):
@@ -92,9 +83,6 @@ def add_watermark_by_PIL(path, text):
 def main():
     url, copyright = get_bing_info()
     path = down_pic(url, save_dir)
-    add_watermark(path, copyright)
-    # add_watermark_by_PIL(path, copyright)
-    set_desktop(path)
+    add_watermark_by_PIL(path, copyright)
 
 main()
-# add_watermark_by_PIL("5.jpg", "卡拉尼石巨石阵，苏格兰路易斯岛")
