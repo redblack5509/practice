@@ -13,7 +13,10 @@ def make_text_image(width, white, text, save_path, mode = "rgb"):
 
     # 字体可能要改
     # linux查看支持的汉字字体 # fc-list :lang=zh
-    ft = ImageFont.truetype("DroidSansFallbackFull.ttf", 15)
+    try:
+        ft = ImageFont.truetype("DroidSansFallbackFull.ttf", 15)
+    except:
+        ft = ImageFont.truetype("wqy-microhei.ttc", 15)
     w, h = ft.getsize(text)
 
     # 计算要几行
