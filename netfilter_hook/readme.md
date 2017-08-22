@@ -5,7 +5,7 @@
 ## 原理  
 
 　　熟悉html的都会了解，在html页面的头信息里面有很多标签，但有的标签并不是必须的，我们可以修改它而基本不会影响页面显示。例如把`<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />`修改为`<script src="test.js"></script>`，这里的修改实则是植入了js。  
-　　拦截用户数据一般是放在路由器端来做，首先会有很多过滤条件，比如是不是http协议，是不是html数据，判断是否有可以修改的html标签，标签长度是否足够，然后修改数据重新计算checksum，完工。  
+　　拦截用户数据一般是放在路由器端通过netfilter来做，首先会有很多过滤条件，比如是不是http协议，是不是html数据，判断是否有可以修改的html标签，标签长度是否足够，然后修改数据重新计算checksum，完工。 
 
 ## 简易实现  
 
