@@ -236,12 +236,17 @@ def main():
     if not op:
         print('bye')
         return
-    print('程序版本号：{}'.format(VERSION))
-    debug.dump_device_info()
-    screenshot.check_screenshot()
 
     # 设置最大分数
-    init_set_score(100)
+    score = input("请输入想达到的最大分数:")
+    try:
+        init_set_score(int(score))
+    except:
+        pass
+
+    print('程序版本号：{}'.format(VERSION))
+    debug.dump_device_info()
+    screenshot.check_screenshot()  
 
     i, next_rest, next_rest_time = (0, random.randrange(3, 10),
                                     random.randrange(5, 10))
