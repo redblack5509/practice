@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>距离查询</title>
+    <style type="text/css">
+        .container {
+            margin-top: 40px;
+            margin-left: 40px;
+        }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+		
+    <textarea id="data" style="width:500px;height:300px;" value=""></textarea><br/>
+    <form id="upload-form" action="cgi-bin/upload_image.py" method="post" enctype="multipart/form-data" >
+　　　<input type="file" id="upload" name="upload" />
+      <input type="submit" value="上传图片" />
+    </form>
+
+    <input type="button" value="发送" id="send" onclick="send()"/>
+    <p id="demo">点击这个按钮，获得您的坐标：</p>
+		
+    </div>
+    <script src="../j.js"></script>
+    <script src="juli.js"></script>
+  </body>
+</html>
