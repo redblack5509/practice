@@ -25,17 +25,19 @@
 ## 定时器接口  
 1. 结构体  
 ```c  
-typedef struct timer_l{  
-    char name[128];         //定时器名字  
-    char first_time[32];    //第一次run的时间，格式"hh:mm:ss"  
-    int interval;  //后续运行的间隔，0表示不间隔运行  
-    int debug_flag;         //debug标志  
-    void (*init)(struct timer_l *t);;   //初始化函数  
-    void (*cb)(void);       //回调  
-    int auto_start;         //随进程自启动还是通过消息启动  
-    int fd;                 //该timer对应的文件描述符  
-    int running;            //定时器已启动的标志  
-}timer_lt;   
+typedef struct timer_l{
+    char name[128];         //定时器名字
+    char first_time[32];    //第一次run的时间，格式"hh:mm:ss"
+    int interval;  //后续运行的间隔，0表示不间隔运行
+    int debug_flag;         //debug标志
+    void (*init)(struct timer_l *t);;   //初始化函数
+    void (*cb)(void);       //回调
+    int auto_start;         //随进程自启动还是通过消息启动
+    int fd;                 //该timer对应的文件描述符
+    int running;            //定时器已启动的标志
+    int child_pid;          //子进程pid
+    int cb_pending_type;    //当回调还在运行的情况下，下一次超时又来了的处理类型
+}timer_lt;  
 ```  
 2. 日志接口  
 ```c  
@@ -59,4 +61,8 @@ llog(LLOG_DEBUG, "%s...\n", s);
 主进程无法判断系统时间是否更新，所以主进程不做判断。如果需要系统时间更新再处理，可以把自己的定时器设置为不随主进程启动（auto_start=0），放到sntp时间服务更新的事件来触发启动定时器。    
 2. stop一个定时器时，如果定时器的回调正在运行会怎么样？    
 回调通过子进程的方式运行，stop定时器时不会影响子进程，只是把主进程的监听移除。
-
+3. 当回调还在运行的情况下超时再次发生的处理方式?
+有三种处理方式可以选择（设置`cb_pending_type`）：
+    1. 直接重复运行回调
+    2. 等待上次回调结束后，然后立即进行回调
+    3. 等待上次回调结束后，下一次timeout才运行回调

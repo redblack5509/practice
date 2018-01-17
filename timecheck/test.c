@@ -9,6 +9,7 @@ void test_timer_cb(void)
 {
     llog(LLOG_DEBUG, "test_timer_cb cb\n");
     system("date");
+    sleep(6);
 }
 
 void test_timer_init(timer_lt *t)
@@ -25,6 +26,7 @@ void test_timer_init(timer_lt *t)
     /* 可以设置定时器参数 */
     strcpy(t->first_time, buf);
     t->interval = 2;
+    t->cb_pending_type = DUP_RUN_CB;
     
     llog(LLOG_INFO, "set first run time: %s, interval: %ds\n", buf, t->interval);
 }

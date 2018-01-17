@@ -8,6 +8,12 @@ enum LEVEL
     LLOG_DEBUG
 };
 
+enum CB_PENDING_TYPE{
+    DUP_RUN_CB = 100,   /* 直接重复运行 */
+    WAIT_RUN,           /* 等待上次回调结束立即进行这次回调 */
+    NEXT_RUN            /* 等待上次回调结束后不立即回调，而是等到下次超时（默认以这种方式） */
+};
+
 typedef struct timer_l{
     char name[128];         //定时器名字
     char first_time[32];    //第一次run的时间，格式"hh:mm:ss"
@@ -18,6 +24,8 @@ typedef struct timer_l{
     int auto_start;         //随进程自启动还是通过消息启动
     int fd;                 //该timer对应的文件描述符
     int running;            //定时器已启动的标志
+    int child_pid;          //子进程pid
+    int cb_pending_type;    //当回调还在运行的情况下，下一次超时又来了的处理类型
 }timer_lt; 
 
 extern int log_level;

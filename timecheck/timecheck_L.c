@@ -264,6 +264,14 @@ void run_client(char *timer_name, char *msg)
     close(fd);
 }
 
+/* 0表示存在，-1不存在 */
+int check_app_alive_by_pid(int pid)
+{
+    char buf[128] = {0};
+
+    snprintf(buf, sizeof(buf), "/proc/%d", pid);
+    return access(buf, O_RDONLY);    
+}
 
 /* 准备timer handle子进程的运行环境 */
 void prepare_child_env(timer_lt *t)
@@ -285,6 +293,34 @@ void prepare_child_env(timer_lt *t)
 void timer_handle(timer_lt *t)
 {
     uint64_t exp_cnt = 0;
+
+    /* 
+        当回调还在运行的情况下有三种处理方式：
+        1. 直接重复运行回调
+        2. 等待上次回调结束后，然后立即进行回调
+        3. 等待上次回调结束后，下一次timeout才运行回调
+    */
+    
+    /* 判断是否该timer的回调是否还在运行 */
+    if(!check_app_alive_by_pid(t->child_pid))
+    {
+        llog(LLOG_DEBUG, "The callback handle is alive! pid is %d\n", t->child_pid);
+
+        switch(t->cb_pending_type)
+        {
+            case DUP_RUN_CB:
+                break;
+            case WAIT_RUN:
+                /* 睡眠10ms，以免主进程一直处于select唤醒状态占满cpu */
+                usleep(10*1000);
+                return;
+            case NEXT_RUN:
+                /* 读取超时次数 */
+                read(t->fd, &exp_cnt, sizeof(uint64_t));
+                /* 直接返回，相当于没发生过这个超时 */
+                return;
+        }
+    }
     
     /* 读取超时次数，以免select被一直唤醒 */
     read(t->fd, &exp_cnt, sizeof(uint64_t));
@@ -292,8 +328,16 @@ void timer_handle(timer_lt *t)
 
     /* 准备handle的运行环境 */
     pid_t pid = fork();
-    if(pid != 0)
+    if(pid < 0)
+    {
+        llog(LLOG_ERR, "fork failed\n");
         return;
+    }
+    if(pid > 0)
+    {
+        t->child_pid = pid;
+        return;
+    }
 
     /* 子进程空间 */
     prepare_child_env(t);
@@ -368,6 +412,9 @@ int start_a_timer(timer_lt *t)
     }
     
     t->running = 1;
+    t->child_pid = -1;
+    if(!IN_RANGE(t->cb_pending_type, DUP_RUN_CB, NEXT_RUN))
+        t->cb_pending_type = NEXT_RUN;  // 默认值
     add_fd(fd);
     return fd;
 }
@@ -441,7 +488,7 @@ void server_sock_handle(int fd)
     if(!strcmp(t->name, "own"))
     {
         if(action == TIMER_DEBUG)
-            log_level = LLOG_DEBUG;
+            log_level = log_level == LLOG_DEBUG ? LLOG_INFO : LLOG_DEBUG;
         else if(action == TIMER_SHOW)
             show_all_timer();
         return;
