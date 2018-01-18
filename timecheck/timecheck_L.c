@@ -431,6 +431,17 @@ void stop_a_timer(timer_lt *t)
     t->fd = -1;
 }
 
+int recv_msg(int fd, char *buf, int len)
+{
+    int rtn = 0;
+
+    do
+    {
+        rtn = read(fd, buf, len);
+    }while(rtn == -1 && errno == EINTR);  /* 收消息可能被子进程退出的信号中断 */
+    
+    return rtn;
+}
 
 /* 解析收到的消息，成功则返回该消息对应的定时器和动作 */
 int parse_recv_msg(char *msg, timer_lt **t, int *action)
@@ -473,7 +484,7 @@ void server_sock_handle(int fd)
     timer_lt *t = NULL;
     int action = 0;
 
-    rtn = read(fd, msg, sizeof(msg) - 1);
+    rtn = recv_msg(fd, msg, sizeof(msg) - 1);
     close(fd);
     del_a_fd(fd);
     llog(LLOG_INFO, "recv %d bytes msg: %s\n", rtn, msg);
