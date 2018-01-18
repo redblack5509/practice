@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "timecheck_L.h"
 
-extern void test_timer_cb(void);
+extern void test_timer_cb(timer_lt *t);
 extern void test_timer_init(timer_lt *t);
 
 timer_lt all_timer[] = {

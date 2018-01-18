@@ -33,7 +33,7 @@ enum ACTION{
 };
 
 #define SERVER_SOCKET_PATH "/var/timecheck_l_usock"
-#define FD_CNT_MAX 128
+#define FD_CNT_MAX 256
 
 #define IN_RANGE(x, a, b) ((x) >= (a) && (x) <= (b))
 
@@ -57,6 +57,7 @@ void add_fd(int fd)
     if(i == FD_CNT_MAX)
     {
         llog(LLOG_ERR, "fd add faild,max fd num is %d\n", FD_CNT_MAX);
+        close(fd);
     }
 }
 
@@ -105,6 +106,23 @@ timer_lt *fd_is_a_timer(fd)
     return NULL;
 }
 
+/* 判断描述符是否是一个管道，如果是返回该管道定时器指针，否则返回NULL */
+timer_lt *fd_is_a_pipe(fd)
+{
+    int i = 0;
+
+    if(-1 == fd)
+        return NULL;
+
+    for(i = 0; i < timer_array_size; i++)
+    {
+        if(all_timer[i].pipe_read_fd == fd)
+            return &all_timer[i];
+    }
+
+    return NULL;
+}
+
 void show_a_timer(timer_lt *t)
 {
     printf("==========================================\n");
@@ -114,6 +132,7 @@ void show_a_timer(timer_lt *t)
     printf("debug_flag: %d\n", t->debug_flag);
     printf("auto_start: %d\n", t->auto_start);
     printf("running_flag: %d\n", t->running);    
+    printf("child pid: %d\n", t->child_pid); 
     printf("===========================================\n");
 }
 
@@ -274,14 +293,17 @@ int check_app_alive_by_pid(int pid)
 }
 
 /* 准备timer handle子进程的运行环境 */
-void prepare_child_env(timer_lt *t)
+void prepare_child_env(timer_lt *t, int pipe)
 {
     int fd = open("/", O_RDONLY);
     int i = 0;
     
     /* 关闭打开的文件描述符 */
     for(i = 3; i <= fd; i++)
-        close(fd);
+    {
+        if(i != pipe)
+            close(i);
+    }
 
     /* 设置debug开关 */
     if(t->debug_flag)
@@ -293,6 +315,8 @@ void prepare_child_env(timer_lt *t)
 void timer_handle(timer_lt *t)
 {
     uint64_t exp_cnt = 0;
+    int pipe_fd[2];
+    int rtn = 0;
 
     /* 
         当回调还在运行的情况下有三种处理方式：
@@ -326,6 +350,7 @@ void timer_handle(timer_lt *t)
     read(t->fd, &exp_cnt, sizeof(uint64_t));
     llog(LLOG_DEBUG, "timer[%s] expire count: %llu\n", t->name, (unsigned long long)exp_cnt);
 
+    pipe(pipe_fd);
     /* 准备handle的运行环境 */
     pid_t pid = fork();
     if(pid < 0)
@@ -336,14 +361,39 @@ void timer_handle(timer_lt *t)
     if(pid > 0)
     {
         t->child_pid = pid;
+
+        close(pipe_fd[1]);  //关闭写
+        t->pipe_read_fd = pipe_fd[0];
+        add_fd(pipe_fd[0]);
         return;
     }
 
     /* 子进程空间 */
-    prepare_child_env(t);
+    close(pipe_fd[0]);
+    prepare_child_env(t, pipe_fd[1]);
+
     if(t->cb)
-        t->cb();
+        t->cb(t);
+
+    /* 把数据传递给父进程 */
+    rtn = write(pipe_fd[1], t->priv_data, sizeof(t->priv_data));
+    //llog(LLOG_DEBUG, "child write %d bytes\n", rtn);
     exit(0);
+}
+
+void pipe_handle(timer_lt *t)
+{
+    int rtn = 0;
+
+    rtn = recv_msg(t->pipe_read_fd, t->priv_data, sizeof(t->priv_data));
+    if(!rtn)
+    {
+        /* 对端已关闭写端 */
+        del_a_fd(t->pipe_read_fd);
+        close(t->pipe_read_fd);
+        t->pipe_read_fd = -1;
+        return;
+    }
 }
 
 /* 初始化一个定时器资源，返回该定时器的文件描述符,失败返回-1 */
@@ -365,6 +415,10 @@ int start_a_timer(timer_lt *t)
         llog(LLOG_ERR, "can't start a timer twice\n");
         return -1;
     }
+
+    /* 初始化结构体 */
+    t->pipe_read_fd = -1;
+    memset(t->priv_data, 0x0, sizeof(t->priv_data));
 
     /* 调用自己定义的初始化函数 */
     if(t->init)
@@ -633,6 +687,10 @@ void run_server(void)
                 if((t = fd_is_a_timer(all_fd[i])))
                 {
                     timer_handle(t);
+                }
+                else if((t = fd_is_a_pipe(all_fd[i])))
+                {
+                    pipe_handle(t);
                 }
                 else
                 {
